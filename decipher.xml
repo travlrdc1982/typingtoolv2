@@ -1417,7 +1417,7 @@ input[type="radio"] + .fir-icon svg {
 
 })();
 ]]></style>
-<html label="sc_page_ui">&lt;style&gt;.nextPage, .button { display: none !important; }
+<html label="sc_page_ui"><style>.nextPage, .button { display: none !important; }
 
 .sc-logo-bar {
   display: none;
@@ -1429,7 +1429,7 @@ form#primary {
 .comment {
   margin-top: unset;
 }
-&lt;/style&gt;
+</style>
 
 <div id="sc-footer">
   Your responses are held strictly confidential.
@@ -1458,7 +1458,7 @@ form#primary {
       right or wrong answers&amp;thinsp;&amp;mdash;&amp;thinsp;we&amp;rsquo;re interested
       in&amp;nbsp;<em>your</em>&amp;nbsp;point of view.<br /><br />Let&amp;rsquo;s begin.
     </p>
-    &lt;button id="sc-start-btn" type="button"&gt;READY, SET, GO!&lt;/button&gt;
+    <button id="sc-start-btn" type="button">READY, SET, GO!</button>
   </div>
 
   <div class="sc-card" id="card-QVOTE">
@@ -1492,27 +1492,27 @@ form#primary {
     </p>
 
     <div class="zip-digits-row">
-      &lt;input class="zip-digit" id="sc-zip-1" type="tel" maxlength="1" inputmode="numeric"
-             autocomplete="off" aria-label="ZIP digit 1"&gt;
-      &lt;input class="zip-digit" id="sc-zip-2" type="tel" maxlength="1" inputmode="numeric"
-             autocomplete="off" aria-label="ZIP digit 2"&gt;
-      &lt;input class="zip-digit" id="sc-zip-3" type="tel" maxlength="1" inputmode="numeric"
-             autocomplete="off" aria-label="ZIP digit 3"&gt;
-      &lt;input class="zip-digit" id="sc-zip-4" type="tel" maxlength="1" inputmode="numeric"
-             autocomplete="off" aria-label="ZIP digit 4"&gt;
-      &lt;input class="zip-digit" id="sc-zip-5" type="tel" maxlength="1" inputmode="numeric"
-             autocomplete="off" aria-label="ZIP digit 5"&gt;
+      <input class="zip-digit" id="sc-zip-1" type="tel" maxlength="1" inputmode="numeric"
+             autocomplete="off" aria-label="ZIP digit 1" />
+      <input class="zip-digit" id="sc-zip-2" type="tel" maxlength="1" inputmode="numeric"
+             autocomplete="off" aria-label="ZIP digit 2" />
+      <input class="zip-digit" id="sc-zip-3" type="tel" maxlength="1" inputmode="numeric"
+             autocomplete="off" aria-label="ZIP digit 3" />
+      <input class="zip-digit" id="sc-zip-4" type="tel" maxlength="1" inputmode="numeric"
+             autocomplete="off" aria-label="ZIP digit 4" />
+      <input class="zip-digit" id="sc-zip-5" type="tel" maxlength="1" inputmode="numeric"
+             autocomplete="off" aria-label="ZIP digit 5" />
     </div>
 
     <div class="sc-field-error" id="zip-error"></div>
 
     <div class="zip-why-row">
-      &lt;button class="zip-why-trigger" type="button"&gt;
+      <button class="zip-why-trigger" type="button">
         <span class="zip-why-icon">?</span>
         <span style="font-size:12px;letter-spacing:.05em;text-transform:uppercase;font-weight:600;">
           WHY DO WE ASK THIS?
         </span>
-      &lt;/button&gt;
+      </button>
       <div class="zip-why-body">
         Your ZIP code helps us ensure we&amp;rsquo;re hearing from people across different parts
         of the country, building a representative sample.
@@ -1521,10 +1521,10 @@ form#primary {
       </div>
     </div>
 
-    &lt;label class="sc-pna-row"&gt;
-      &lt;input class="sc-pna-chk" id="zip-pna" type="checkbox"&gt;
+    <label class="sc-pna-row">
+      <input class="sc-pna-chk" id="zip-pna" type="checkbox" />
       <span>Prefer not to answer</span>
-    &lt;/label&gt;
+    </label>
   </div>
 
   <div class="sc-card" id="card-qage">
@@ -1533,18 +1533,18 @@ form#primary {
     <div class="age-instruction">Enter two digits &amp;mdash; e.g., &amp;ldquo;4&amp;rdquo; then &amp;ldquo;5&amp;rdquo; for age 45</div>
 
     <div class="age-digits-row">
-      &lt;input class="age-digit" id="sc-age-1" type="tel" maxlength="1" inputmode="numeric"
-             autocomplete="off" aria-label="Age tens digit"&gt;
-      &lt;input class="age-digit" id="sc-age-2" type="tel" maxlength="1" inputmode="numeric"
-             autocomplete="off" aria-label="Age units digit"&gt;
+      <input class="age-digit" id="sc-age-1" type="tel" maxlength="1" inputmode="numeric"
+             autocomplete="off" aria-label="Age tens digit" />
+      <input class="age-digit" id="sc-age-2" type="tel" maxlength="1" inputmode="numeric"
+             autocomplete="off" aria-label="Age units digit" />
     </div>
 
     <div class="sc-field-error" id="age-error"></div>
 
-    &lt;label class="sc-pna-row"&gt;
-      &lt;input class="sc-pna-chk" id="age-pna" type="checkbox"&gt;
+    <label class="sc-pna-row">
+      <input class="sc-pna-chk" id="age-pna" type="checkbox" />
       <span>Prefer not to respond</span>
-    &lt;/label&gt;
+    </label>
   </div>
 
   <div class="sc-card" id="card-qgender">
@@ -1557,10 +1557,10 @@ form#primary {
       <div data-val="3" class="gender-pill">OTHER</div>
     </div>
 
-    &lt;label class="sc-pna-row"&gt;
-      &lt;input class="sc-pna-chk" id="gender-pna" type="checkbox"&gt;
+    <label class="sc-pna-row">
+      <input class="sc-pna-chk" id="gender-pna" type="checkbox" />
       <span>Prefer not to respond</span>
-    &lt;/label&gt;
+    </label>
   </div>
 
   <div class="sc-card" id="card-qvote24">
@@ -1596,10 +1596,10 @@ form#primary {
       </div>
     </div>
 
-    &lt;label class="sc-pna-row"&gt;
-      &lt;input class="sc-pna-chk" id="vote-pna" type="checkbox"&gt;
+    <label class="sc-pna-row">
+      <input class="sc-pna-chk" id="vote-pna" type="checkbox" />
       <span>Prefer not to respond</span>
-    &lt;/label&gt;
+    </label>
   </div>
 
   <div class="sc-card" id="card-party">
@@ -1621,10 +1621,10 @@ form#primary {
       </div>
     </div>
 
-    &lt;label class="sc-pna-row" id="party-pna-main"&gt;
-      &lt;input class="sc-pna-chk" id="party-pna" type="checkbox"&gt;
+    <label class="sc-pna-row" id="party-pna-main">
+      <input class="sc-pna-chk" id="party-pna" type="checkbox" />
       <span>Prefer not to respond</span>
-    &lt;/label&gt;
+    </label>
 
     <div class="party-sub" id="party-sub-a">
       <div class="sc-q-text">
@@ -1651,10 +1651,10 @@ form#primary {
         </div>
       </div>
 
-      &lt;label class="sc-pna-row"&gt;
-        &lt;input class="sc-pna-chk" id="party2-pna" type="checkbox"&gt;
+      <label class="sc-pna-row">
+        <input class="sc-pna-chk" id="party2-pna" type="checkbox" />
         <span>Prefer not to respond</span>
-      &lt;/label&gt;
+      </label>
     </div>
 
     <div class="party-sub" id="party-sub-b">
@@ -1674,16 +1674,16 @@ form#primary {
         </div>
       </div>
 
-      &lt;label class="sc-pna-row"&gt;
-        &lt;input class="sc-pna-chk" id="party3-pna" type="checkbox"&gt;
+      <label class="sc-pna-row">
+        <input class="sc-pna-chk" id="party3-pna" type="checkbox" />
         <span>Prefer not to respond</span>
-      &lt;/label&gt;
+      </label>
     </div>
 
   </div>
 
   <div style="display:none; text-align:center; padding:24px 0 16px;" id="sc-continue-wrap">
-    &lt;button id="sc-continue-btn" type="button"&gt;CONTINUE &amp;gt;&lt;/button&gt;
+    <button id="sc-continue-btn" type="button">CONTINUE &amp;gt;</button>
   </div>
 
 </div></html>
