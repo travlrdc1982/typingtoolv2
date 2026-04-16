@@ -37,7 +37,24 @@
 <samplesources default="0">
   <samplesource list="0">
     <title>Open Survey</title>
-    <exit cond="qualified"><b>Thank you for completing the survey!</b></exit>
+    <exit cond="qualified"><![CDATA[
+<div style="text-align:center; padding:32px 16px; font-family:Inter,sans-serif; color:#333;">
+  <h2 style="font-family:Fraunces,Georgia,serif; font-size:24px; font-weight:700; margin:0 0 12px;">Your Health Influence Profile</h2>
+  <p style="font-size:14px; color:#888; margin:0 0 28px;">Thanks for completing the survey. Based on your answers:</p>
+
+  <div style="background:#F5F2ED; border:1px solid #E0DCD6; border-radius:10px; padding:22px 24px; margin:0 auto 16px; max-width:480px;">
+    <div style="font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#6B7F4E; margin-bottom:6px;">Primary Segment</div>
+    <div style="font-family:Fraunces,Georgia,serif; font-size:20px; font-weight:700; color:#333; line-height:1.3; margin-bottom:10px;">[pipe: SEG1_LABEL]</div>
+    <div style="font-size:34px; font-weight:700; color:#6B7F4E;">[pipe: SEG1_PCT]%</div>
+  </div>
+
+  <div style="background:#FFFFFF; border:1px solid #E0DCD6; border-radius:10px; padding:18px 24px; margin:0 auto; max-width:480px;">
+    <div style="font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#888; margin-bottom:6px;">Second-Best Match</div>
+    <div style="font-family:Fraunces,Georgia,serif; font-size:17px; font-weight:600; color:#333; line-height:1.3; margin-bottom:8px;">[pipe: SEG2_LABEL]</div>
+    <div style="font-size:24px; font-weight:700; color:#888;">[pipe: SEG2_PCT]%</div>
+  </div>
+</div>
+]]></exit>
     <exit cond="terminated"><b>Thank you for your time.</b></exit>
     <exit cond="overquota"><b>Thank you for your time.</b></exit>
   </samplesource>
@@ -45,10 +62,6 @@
 
 <suspend/>
 
-<html label="Start_Info" cond="1==2" where="survey"><p class="intro-body">Thanks for taking part. This survey helps us understand how people think about health&amp;nbsp;care and public policy today. There are no right or wrong answers — we’re interested in&amp;nbsp;<em>your</em>&amp;nbsp;point of view.<br /><br />Let’s begin.</p>
-<p></p></html>
-
-<suspend/>
 
 <style cond="device.smartphone or device.tablet" name="survey.header"><![CDATA[
 <style type="text/css">
@@ -924,44 +937,8 @@ body, .survey-body, .main-content {
 <style mode="after" name="respview.client.js" wrap="ready"><![CDATA[
 jQuery('[type="text"]').attr('placeholder', '>>  Specify');
 ]]></style>
-<style name="respview.client.js" with="d2,edu" wrap="ready"><![CDATA[
-setInterval(function () {
-  const isChecked = jQuery("input[type='checkbox']").is(":checked");
-
-  if (isChecked) {
-    jQuery('input[type="radio"]').prop("checked", false).trigger("change");
-    jQuery('input[type="radio"]').prop("disabled", true);
-  } else {
-    jQuery('input[type="radio"]').prop("disabled", false);
-  }
-}, 100);
-]]></style>
-<style name="respview.client.js" with="REL,income" wrap="ready"><![CDATA[
-jQuery(document).on("change", "input[type='checkbox']", function () {
-const anyChecked = jQuery("input[type='checkbox']").is(":checked");
-  if (anyChecked) 
-  {
-    // reset to default (-1) and disable
-    jQuery('[class="input dropdown"]').val('-1').trigger('change');
-    jQuery('[class="input dropdown"]').prop('disabled', true).attr('aria-disabled', 'true');
-  } 
-  else {
-    // enable again
-    jQuery('[class="input dropdown"]').prop('disabled', false).attr('aria-disabled', 'false');
-  }
-  });
-]]></style>
-<style name="respview.client.js" with="qsocialinfluence,HHIX102" wrap="ready"><![CDATA[
-setInterval(function(){
-            if($ ("div[class*='sq-cardrating-widget']").attr("data-atend") == "true")
-              $ ("#btn_continue").click();
-      },100);
-]]></style>
 <style mode="after" name="respview.client.js" with="QMD1_intro2" wrap="ready"><![CDATA[
 document.getElementById('btn_continue').setAttribute('value', 'ENJOY!');
-]]></style>
-<style mode="after" name="respview.client.js" with="Start_Info" wrap="ready"><![CDATA[
-document.getElementById('btn_continue').setAttribute('value', 'READY, SET, GO!');
 ]]></style>
 <style mode="after" name="respview.client.js" wrap="ready"><![CDATA[
 var defined = function(s,c){ return (c||document).querySelector(s); };
@@ -1291,133 +1268,7 @@ var defined = function(s,c){ return (c||document).querySelector(s); };
     }
   });
 ]]></style>
-<style name="respview.client.css" with="qvector4"><![CDATA[
-<style>
-
-.fir-icon {
-  width: unset;
-  height: unset;
-}
-
-.grid.grid-table-mode.setWidth {
-  max-width: 600px;
-}
-
-.grid-table-mode .nonempty {
-  border: unset;
-}
-
-.col-legend {
-  background-color: unset;
-}
-
-input[type="radio"] + .fir-icon svg {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  border-radius: 50%;
-  //border: 2px solid #C5C0B8;
-  //background: radial-gradient(circle at 35% 35%, #FAFAFA, #E8E4DE);
-  box-shadow: 0 2px 6px rgba(0,0,0,.12), inset 0 1px 2px rgba(255,255,255,.6);
-  cursor: pointer;
-  transition: all .2s ease;
-  outline: none;
-}
-
-
-.fir-icon svg:hover {
-  transform: scale(1.08);
-}
-
-  /* --- HHIX106 color mapping: c1 = red, c4 = gray, c7 = red --- */
-
-  /* Neutralize earlier global overrides just for this question */
-  #question_qvector4 .fir-icon.selected .rounded .fir-selected,
-  #question_qvector4 .fir-icon.selected .square  .fir-selected {
-    /* Let column-specific rules below control the color */
-    fill: inherit !important;
-  }
-
-  /* Smooth transition for hover preview */
-  #question_qvector4 .fir-selected {
-    transition: fill .15s ease;
-  }
-
-  /* Column 1 (Strongly Disagree) -> RED when selected or hovered */
-  #question_qvector4 td[headers~="qvector4_c1"] .fir-icon.selected .fir-selected,
-  #question_qvector4 td[headers~="qvector4_c1"]:hover               .fir-selected {
-    fill: #C62828 !important;
-  }
-  
-  /* Column 2 (Strongly Disagree) -> RED when selected or hovered */
-  #question_qvector4 td[headers~="qvector4_c2"] .fir-icon.selected .fir-selected,
-  #question_qvector4 td[headers~="qvector4_c2"]:hover               .fir-selected {
-    fill: #EF5350 !important;
-  }
-  
-  /* Column 3 (Strongly Disagree) -> RED when selected or hovered */
-  #question_qvector4 td[headers~="qvector4_c3"] .fir-icon.selected .fir-selected,
-  #question_qvector4 td[headers~="qvector4_c3"]:hover               .fir-selected {
-    fill: #F6A6A6 !important;
-  }
-
-  /* Column 4 (Neutral/Unsure) -> GRAY when selected or hovered */
-  #question_qvector4 td[headers~="qvector4_c4"] .fir-icon.selected .fir-selected,
-  #question_qvector4 td[headers~="qvector4_c4"]:hover               .fir-selected {
-    fill: #BDBDBD !important;
-  }
-
-  /* Column 5 (Neutral/Unsure) -> GRAY when selected or hovered */
-  #question_qvector4 td[headers~="qvector4_c5"] .fir-icon.selected .fir-selected,
-  #question_qvector4 td[headers~="qvector4_c5"]:hover               .fir-selected {
-    fill: #A5D6A7 !important;
-  }
-  
-   /* Column 5 (Neutral/Unsure) -> GRAY when selected or hovered */
-  #question_qvector4 td[headers~="qvector4_c6"] .fir-icon.selected .fir-selected,
-  #question_qvector4 td[headers~="qvector4_c6"]:hover               .fir-selected {
-    fill: #66BB6A !important;
-  }
-  
-  /* Column 7 (Strongly Agree / last) -> RED when selected or hovered */
-  #question_qvector4 td[headers~="qvector4_c7"] .fir-icon.selected .fir-selected,
-  #question_qvector4 td[headers~="qvector4_c7"]:hover               .fir-selected {
-    fill: #2E7D32 !important;
-  }
-
-
-    </style>
-]]></style>
-<style name="respview.client.js" with="STIGMA_ATT" wrap="ready"><![CDATA[
-(function() {
-  var total = 13;
-  var current = 1;
-  var injected = false;
-
-  setInterval(function() {
-    if (!injected) {
-      $ ('#question_STIGMA_ATT').prepend(
-        '<div class="sc-q-label" id="stigma-counter">CARD 1 OF ' + total + '</div>'
-      );
-      injected = true;
-    }
-
-    if ($ (".sq-cardrating-widget").attr("data-atend") === "true") {
-      $ ("#btn_continue").click();
-    }
-  }, 150);
-
-  $ (document).on("click", ".sq-cardrating-button", function() {
-    current = Math.min(current + 1, total);
-    $ ("#stigma-counter").text("CARD " + current + " OF " + total);
-  });
-
-})();
-]]></style>
-<html label="sc_page_ui">&lt;style&gt;.nextPage, .button { display: none !important; }
+<html label="sc_page_ui"><![CDATA[<style>.nextPage, .button { display: none !important; }
 
 .sc-logo-bar {
   display: none;
@@ -1429,7 +1280,7 @@ form#primary {
 .comment {
   margin-top: unset;
 }
-&lt;/style&gt;
+</style>
 
 <div id="sc-footer">
   Your responses are held strictly confidential.
@@ -1454,11 +1305,11 @@ form#primary {
     </div>
     <p class="intro-body">
       Thanks for taking part. This survey helps us understand how people
-      think about health&amp;nbsp;care and public policy today. There are no
-      right or wrong answers&amp;thinsp;&amp;mdash;&amp;thinsp;we&amp;rsquo;re interested
-      in&amp;nbsp;<em>your</em>&amp;nbsp;point of view.<br /><br />Let&amp;rsquo;s begin.
+      think about health&nbsp;care and public policy today. There are no
+      right or wrong answers&thinsp;&mdash;&thinsp;we&rsquo;re interested
+      in&nbsp;<em>your</em>&nbsp;point of view.<br /><br />Let&rsquo;s begin.
     </p>
-    &lt;button id="sc-start-btn" type="button"&gt;READY, SET, GO!&lt;/button&gt;
+    <button id="sc-start-btn" type="button">READY, SET, GO!</button>
   </div>
 
   <div class="sc-card" id="card-QVOTE">
@@ -1468,12 +1319,12 @@ form#primary {
     <div class="QVOTE-btn-group">
 
       <div aria-label="Yes" data-val="1" role="radio" class="QVOTE-btn QVOTE-yes" tabindex="0">
-        <div class="QVOTE-shape">&amp;#10003;</div>
+        <div class="QVOTE-shape">&#10003;</div>
         <span class="QVOTE-btn-label">YES</span>
       </div>
 
       <div aria-label="No" data-val="2" role="radio" class="QVOTE-btn QVOTE-no" tabindex="0">
-        <div class="QVOTE-shape">&amp;#10005;</div>
+        <div class="QVOTE-shape">&#10005;</div>
         <span class="QVOTE-btn-label">NO</span>
       </div>
 
@@ -1492,59 +1343,59 @@ form#primary {
     </p>
 
     <div class="zip-digits-row">
-      &lt;input class="zip-digit" id="sc-zip-1" type="tel" maxlength="1" inputmode="numeric"
-             autocomplete="off" aria-label="ZIP digit 1"&gt;
-      &lt;input class="zip-digit" id="sc-zip-2" type="tel" maxlength="1" inputmode="numeric"
-             autocomplete="off" aria-label="ZIP digit 2"&gt;
-      &lt;input class="zip-digit" id="sc-zip-3" type="tel" maxlength="1" inputmode="numeric"
-             autocomplete="off" aria-label="ZIP digit 3"&gt;
-      &lt;input class="zip-digit" id="sc-zip-4" type="tel" maxlength="1" inputmode="numeric"
-             autocomplete="off" aria-label="ZIP digit 4"&gt;
-      &lt;input class="zip-digit" id="sc-zip-5" type="tel" maxlength="1" inputmode="numeric"
-             autocomplete="off" aria-label="ZIP digit 5"&gt;
+      <input class="zip-digit" id="sc-zip-1" type="tel" maxlength="1" inputmode="numeric"
+             autocomplete="off" aria-label="ZIP digit 1">
+      <input class="zip-digit" id="sc-zip-2" type="tel" maxlength="1" inputmode="numeric"
+             autocomplete="off" aria-label="ZIP digit 2">
+      <input class="zip-digit" id="sc-zip-3" type="tel" maxlength="1" inputmode="numeric"
+             autocomplete="off" aria-label="ZIP digit 3">
+      <input class="zip-digit" id="sc-zip-4" type="tel" maxlength="1" inputmode="numeric"
+             autocomplete="off" aria-label="ZIP digit 4">
+      <input class="zip-digit" id="sc-zip-5" type="tel" maxlength="1" inputmode="numeric"
+             autocomplete="off" aria-label="ZIP digit 5">
     </div>
 
     <div class="sc-field-error" id="zip-error"></div>
 
     <div class="zip-why-row">
-      &lt;button class="zip-why-trigger" type="button"&gt;
+      <button class="zip-why-trigger" type="button">
         <span class="zip-why-icon">?</span>
         <span style="font-size:12px;letter-spacing:.05em;text-transform:uppercase;font-weight:600;">
           WHY DO WE ASK THIS?
         </span>
-      &lt;/button&gt;
+      </button>
       <div class="zip-why-body">
-        Your ZIP code helps us ensure we&amp;rsquo;re hearing from people across different parts
+        Your ZIP code helps us ensure we&rsquo;re hearing from people across different parts
         of the country, building a representative sample.
         <strong>FUN FACT:</strong> ZIP codes tie you to your congressional district, so we can ask
-        follow&amp;#x2011;up questions about your community &amp;#x2014; they never reveal your name or exact address.
+        follow&#x2011;up questions about your community &#x2014; they never reveal your name or exact address.
       </div>
     </div>
 
-    &lt;label class="sc-pna-row"&gt;
-      &lt;input class="sc-pna-chk" id="zip-pna" type="checkbox"&gt;
+    <label class="sc-pna-row">
+      <input class="sc-pna-chk" id="zip-pna" type="checkbox">
       <span>Prefer not to answer</span>
-    &lt;/label&gt;
+    </label>
   </div>
 
   <div class="sc-card" id="card-qage">
     <div class="sc-q-label">3 of 6 Questions</div>
     <div class="sc-q-text">Tell us how old you are.</div>
-    <div class="age-instruction">Enter two digits &amp;mdash; e.g., &amp;ldquo;4&amp;rdquo; then &amp;ldquo;5&amp;rdquo; for age 45</div>
+    <div class="age-instruction">Enter two digits &mdash; e.g., &ldquo;4&rdquo; then &ldquo;5&rdquo; for age 45</div>
 
     <div class="age-digits-row">
-      &lt;input class="age-digit" id="sc-age-1" type="tel" maxlength="1" inputmode="numeric"
-             autocomplete="off" aria-label="Age tens digit"&gt;
-      &lt;input class="age-digit" id="sc-age-2" type="tel" maxlength="1" inputmode="numeric"
-             autocomplete="off" aria-label="Age units digit"&gt;
+      <input class="age-digit" id="sc-age-1" type="tel" maxlength="1" inputmode="numeric"
+             autocomplete="off" aria-label="Age tens digit">
+      <input class="age-digit" id="sc-age-2" type="tel" maxlength="1" inputmode="numeric"
+             autocomplete="off" aria-label="Age units digit">
     </div>
 
     <div class="sc-field-error" id="age-error"></div>
 
-    &lt;label class="sc-pna-row"&gt;
-      &lt;input class="sc-pna-chk" id="age-pna" type="checkbox"&gt;
+    <label class="sc-pna-row">
+      <input class="sc-pna-chk" id="age-pna" type="checkbox">
       <span>Prefer not to respond</span>
-    &lt;/label&gt;
+    </label>
   </div>
 
   <div class="sc-card" id="card-qgender">
@@ -1557,10 +1408,10 @@ form#primary {
       <div data-val="3" class="gender-pill">OTHER</div>
     </div>
 
-    &lt;label class="sc-pna-row"&gt;
-      &lt;input class="sc-pna-chk" id="gender-pna" type="checkbox"&gt;
+    <label class="sc-pna-row">
+      <input class="sc-pna-chk" id="gender-pna" type="checkbox">
       <span>Prefer not to respond</span>
-    &lt;/label&gt;
+    </label>
   </div>
 
   <div class="sc-card" id="card-qvote24">
@@ -1592,19 +1443,19 @@ form#primary {
         <span class="ballot-label">Another Candidate</span>
       </div>
       <div data-val="4" class="ballot-bottom-row">
-        <span class="ballot-label">I didn&amp;rsquo;t have the chance to vote in this election</span>
+        <span class="ballot-label">I didn&rsquo;t have the chance to vote in this election</span>
       </div>
     </div>
 
-    &lt;label class="sc-pna-row"&gt;
-      &lt;input class="sc-pna-chk" id="vote-pna" type="checkbox"&gt;
+    <label class="sc-pna-row">
+      <input class="sc-pna-chk" id="vote-pna" type="checkbox">
       <span>Prefer not to respond</span>
-    &lt;/label&gt;
+    </label>
   </div>
 
   <div class="sc-card" id="card-party">
     <div class="sc-q-label">6 of 6 Questions</div>
-    <div class="sc-q-text">In politics today, do you consider yourself a&amp;hellip;?</div>
+    <div class="sc-q-text">In politics today, do you consider yourself a&hellip;?</div>
 
     <div class="party-main-btns">
       <div aria-label="Republican" data-val="1" role="radio" class="party-btn party-main-btn" tabindex="0">
@@ -1621,10 +1472,10 @@ form#primary {
       </div>
     </div>
 
-    &lt;label class="sc-pna-row" id="party-pna-main"&gt;
-      &lt;input class="sc-pna-chk" id="party-pna" type="checkbox"&gt;
+    <label class="sc-pna-row" id="party-pna-main">
+      <input class="sc-pna-chk" id="party-pna" type="checkbox">
       <span>Prefer not to respond</span>
-    &lt;/label&gt;
+    </label>
 
     <div class="party-sub" id="party-sub-a">
       <div class="sc-q-text">
@@ -1651,14 +1502,14 @@ form#primary {
         </div>
       </div>
 
-      &lt;label class="sc-pna-row"&gt;
-        &lt;input class="sc-pna-chk" id="party2-pna" type="checkbox"&gt;
+      <label class="sc-pna-row">
+        <input class="sc-pna-chk" id="party2-pna" type="checkbox">
         <span>Prefer not to respond</span>
-      &lt;/label&gt;
+      </label>
     </div>
 
     <div class="party-sub" id="party-sub-b">
-      <div class="sc-q-text">Do you <strong>lean</strong> toward the&amp;hellip;</div>
+      <div class="sc-q-text">Do you <strong>lean</strong> toward the&hellip;</div>
       <div class="party-lean-btns">
         <div data-val="1" class="party-lean-btn">
           <img src="[rel GOP_Icon.svg]" alt="GOP" class="party-icon" />
@@ -1674,19 +1525,19 @@ form#primary {
         </div>
       </div>
 
-      &lt;label class="sc-pna-row"&gt;
-        &lt;input class="sc-pna-chk" id="party3-pna" type="checkbox"&gt;
+      <label class="sc-pna-row">
+        <input class="sc-pna-chk" id="party3-pna" type="checkbox">
         <span>Prefer not to respond</span>
-      &lt;/label&gt;
+      </label>
     </div>
 
   </div>
 
   <div style="display:none; text-align:center; padding:24px 0 16px;" id="sc-continue-wrap">
-    &lt;button id="sc-continue-btn" type="button"&gt;CONTINUE &amp;gt;&lt;/button&gt;
+    <button id="sc-continue-btn" type="button">CONTINUE ></button>
   </div>
 
-</div></html>
+</div>]]></html>
 
 <radio 
   label="QVOTE"
@@ -3136,1573 +2987,90 @@ elif XDEM_SEG_FINAL_1.any:
   <row label="r16">16. Global Health Institutionalists (GHI)</row>
 </radio>
 
-<suspend/>
-
-<style mode="after" name="respview.client.css" with="cm1,cm2,cm3,QMD1_intro2"><![CDATA[
-<style>
-.question-text, .ParaText {
-    padding: 0 15%;
-}
-</style>
-]]></style>
-<html label="cm1" where="survey">The questions that follow help us understand how you tend to engage and where your influence shows up. At the end of the survey, we’ll share a snapshot of your influence profile.</html>
-
-<suspend/>
-
-<style name="respview.client.css" with="qinf360_eliteup,qinf360_recruitup,qinf360_orglat,qinf360_medialat,qinf360_down,qinf360_none" wrap="ready"><![CDATA[
-#question_text_qinf360_eliteup,#question_text_qinf360_recruitup,#question_text_qinf360_orglat,#question_text_qinf360_medialat,#question_text_qinf360_down,#question_text_text_qinf360_none
-{
-display: none !important;
-}
-]]></style>
-<style name="respview.client.js" with="qinf360_none" wrap="ready"><![CDATA[
-jQuery('#question_qinf360_eliteup, #question_qinf360_recruitup, #question_qinf360_orglat, #question_qinf360_medialat, #question_qinf360_down, #question_qinf360_none').hide();
-
-
-
-jQuery("#question_text_qinf360_eliteup, \
-#question_text_qinf360_recruitup, \
-#question_text_qinf360_orglat, \
-#question_text_qinf360_medialat, \
-#question_text_qinf360_down, \
-#question_text_qinf360_none, \
-#comment_qinf360_intro").hide();
-
-setInterval(function () {
-
-  jQuery("input[id='ans21436.0.0']").is(":checked")
-    ? jQuery('#question_qinf360_eliteup').show()
-    : jQuery('#question_qinf360_eliteup').hide();
-
-  jQuery("input[id='ans21436.0.1']").is(":checked")
-    ? jQuery('#question_qinf360_recruitup').show()
-    : jQuery('#question_qinf360_recruitup').hide();
-
-  jQuery("input[id='ans21436.0.2']").is(":checked")
-    ? jQuery('#question_qinf360_orglat').show()
-    : jQuery('#question_qinf360_orglat').hide();
-
-  jQuery("input[id='ans21436.0.3']").is(":checked")
-    ? jQuery('#question_qinf360_medialat').show()
-    : jQuery('#question_qinf360_medialat').hide();
-
-  jQuery("input[id='ans21436.0.4']").is(":checked")
-    ? jQuery('#question_qinf360_down').show()
-    : jQuery('#question_qinf360_down').hide();
-
-  jQuery(
-    "input[id='ans21436.0.0'], \
-     input[id='ans21436.0.1'], \
-     input[id='ans21436.0.2'], \
-     input[id='ans21436.0.3'], \
-     input[id='ans21436.0.4']"
-  ).is(":checked")
-    ? jQuery('#question_qinf360_none, #comment_qinf360_intro').show()
-    : jQuery('#question_qinf360_none, #comment_qinf360_intro').hide(); 
-    
-
-}, 100);
-
-
-
-// r1 Sub-question list (keep as-is if you plan to add more later)
-var qinf360_eliteup = ['qinf360_eliteup'];
-var qinf360r1 = jQuery("input[id='ans21436.0.0']");
-// When the main question (qinf360r1) is NOT checked, uncheck all sub-battery items.
-// When it IS checked, do nothing.
-qinf360r1.on('change', function () {
-  if (!jQuery(this).is(':checked')) {
-    jQuery.each(qinf360_eliteup, function (i, qid) {
-      jQuery('#question_' + qid + ' input[type="checkbox"]:checked')
-        .prop('checked', false)
-        .trigger('change');
-    });
-  }
-});
-
-// r2 Sub-question list (keep as-is if you plan to add more later)
-var qinf360_recruitup = ['qinf360_recruitup'];
-var qinf360r2 = jQuery("input[id='ans21436.0.1']");
-// When the main question (qinf360r2) is NOT checked, uncheck all sub-battery items.
-// When it IS checked, do nothing.
-qinf360r2.on('change', function () {
-  if (!jQuery(this).is(':checked')) {
-    jQuery.each(qinf360_recruitup, function (i, qid) {
-      jQuery('#question_' + qid + ' input[type="checkbox"]:checked')
-        .prop('checked', false)
-        .trigger('change');
-    });
-  }
-});
-
-
-// r3 Sub-question list (keep as-is if you plan to add more later)
-var qinf360_orglat = ['qinf360_orglat'];
-var qinf360r3 = jQuery("input[id='ans21436.0.2']");
-// When the main question (qinf360r3) is NOT checked, uncheck all sub-battery items.
-// When it IS checked, do nothing.
-qinf360r4.on('change', function () {
-  if (!jQuery(this).is(':checked')) {
-    jQuery.each(qinf360_medialat, function (i, qid) {
-      jQuery('#question_' + qid + ' input[type="checkbox"]:checked')
-        .prop('checked', false)
-        .trigger('change');
-    });
-  }
-});
-
-// r4 Sub-question list (keep as-is if you plan to add more later)
-var qinf360_medialat = ['qinf360_medialat'];
-var qinf360r4 = jQuery("input[id='ans21436.0.3']");
-// When the main question (qinf360r3) is NOT checked, uncheck all sub-battery items.
-// When it IS checked, do nothing.
-qinf360r5.on('change', function () {
-  if (!jQuery(this).is(':checked')) {
-    jQuery.each(qinf360_down, function (i, qid) {
-      jQuery('#question_' + qid + ' input[type="checkbox"]:checked')
-        .prop('checked', false)
-        .trigger('change');
-    });
-  }
-});
-
-// r5 Sub-question list (keep as-is if you plan to add more later)
-var qinf360_down = ['qinf360_down'];
-var qinf360r5 = jQuery("input[id='ans21436.0.4']");
-// When the main question (qinf360r3) is NOT checked, uncheck all sub-battery items.
-// When it IS checked, do nothing.
-qinf360r3.on('change', function () {
-  if (!jQuery(this).is(':checked')) {
-    jQuery.each(qinf360_down, function (i, qid) {
-      jQuery('#question_' + qid + ' input[type="checkbox"]:checked')
-        .prop('checked', false)
-        .trigger('change');
-    });
-  }
-});
-
-  var subQs = ['qinf360_eliteup','qinf360_recruitup','qinf360_orglat','qinf360_medialat','qinf360_down'];
-
-  var noneBoxPre = jQuery("input[id='ans21436.0.6']")
-  var noneBox = jQuery('#question_qinf360_none input[type="checkbox"]');
-  
-  // When "noneBoxPre - None of these" is checked, uncheck all sub-battery items
-  noneBoxPre.on('change', function() {
-    if (jQuery(this).is(':checked')) {
-      jQuery('#question_qinf360_none input[type="checkbox"]').prop('checked', false).trigger('change');
-      jQuery.each(subQs, function(i, qid) {
-        jQuery('#question_' + qid + ' input[type="checkbox"]:checked').each(function() {
-          jQuery(this).prop('checked', false).trigger('change');
-        });
-      });
-    }
-  });
-  
-  // When "noneBox - None of these" is checked, uncheck all sub-battery items
-  noneBox.on('change', function() {
-    if (jQuery(this).is(':checked')) {
-      jQuery.each(subQs, function(i, qid) {
-        jQuery('#question_' + qid + ' input[type="checkbox"]:checked').each(function() {
-          jQuery(this).prop('checked', false).trigger('change');
-        });
-      });
-    }
-  });
-
-  // When any sub-battery item is checked, uncheck "None of these"
-  jQuery.each(subQs, function(i, qid) {
-    jQuery('#question_' + qid).on('change', 'input[type="checkbox"]', function() {
-      if (jQuery(this).is(':checked') && noneBox.is(':checked')) {
-        noneBox.prop('checked', false).trigger('change');
-      }
-    });
-  });
-  
-  
- jQuery(
-  "input[id^='ans21436.0.']"
-).on('change', function () {
-
-  if (
-    jQuery("input[id^='ans21436.0.']").filter(':checked').length === 0
-  ) {
-    jQuery('#question_qinf360_none input[type="checkbox"]')
-      .prop('checked', false)
-      .trigger('change');
-  }
-
-});
-]]></style>
-<checkbox 
-  label="qinf360"
-  atleast="1"
-  keepWith="qinf360_eliteup,qinf360_recruitup,qinf360_orglat,qinf360_medialat,qinf360_down,qinf360_none">
-  <title>How have you made your voice heard?</title>
-  <comment>Select all that apply. At the end, you'll see your Influence Compass.</comment>
-  <validate>
-if (qinf360.r1 or qinf360.r2 or qinf360.r3 or qinf360.r4 or qinf360.r5) and not(qinf360_eliteup.any) and not(qinf360_recruitup.any) and not(qinf360_orglat.any) and not(qinf360_medialat.any) and not(qinf360_down.any) and not(qinf360_none.any):
-	error(res.sys_noAnswerSelected)
-  </validate>
-
-  <row label="r1" groups="g1">I've worked inside government, held office, or staffed those who do</row>
-  <row label="r2" groups="g1">I've helped decide who runs for office or who gets hired in political or government roles</row>
-  <row label="r3" groups="g1">I advise organizations, sit on boards, or have testified on policy matters</row>
-  <row label="r4" groups="g1">I've written, spoken publicly, or published on issues</row>
-  <row label="r5" groups="g1">I've organized people, worked campaigns, or rallied others to action</row>
-  <row label="r6" groups="g1">I vote, follow current events, and stay involved in my community</row>
-  <row label="r7" exclusive="1" groups="g2" randomize="0"><span class="NoneOfThese">None of these</span></row>
-  <group label="g1" builder:axis="row" builder:default="1" where="none">no group</group>
-  <group label="g2" builder:axis="row">&amp;nbsp;&amp;nbsp;</group>
-</checkbox>
-
-<html label="qinf360_intro" where="survey"><h1 class="question-text">Which of these have you done?</h1>
-  <h2 class="instruction-text">Select all that apply</h2></html>
-
-<checkbox 
-  label="qinf360_eliteup"
-  keepWith="qinf360,qinf360_recruitup,qinf360_orglat,qinf360_medialat,qinf360_down,qinf360_none"
-  optional="1">
-  <title>qinf360_eliteup</title>
-  <row label="r1">Held elected office</row>
-  <row label="r2">Been a paid staffer or advisor to an elected official or gov't agency</row>
-  <row label="r3">Held an elected or appointed role in a party committee</row>
-  <row label="r4">Contacted an elected official or their staff</row>
-</checkbox>
-
-<checkbox 
-  label="qinf360_recruitup"
-  keepWith="qinf360,qinf360_eliteup,qinf360_orglat,qinf360_medialat,qinf360_down,qinf360_none"
-  optional="1">
-  <title>qinf360_recruitup</title>
-  <row label="r1">Helped recruit a candidate to run for public office</row>
-  <row label="r2">Helped recruit staff for a political campaign, office of an elected official, or other political appointee</row>
-</checkbox>
-
-<checkbox 
-  label="qinf360_orglat"
-  keepWith="qinf360,qinf360_eliteup,qinf360_recruitup,qinf360_medialat,qinf360_down,qinf360_none"
-  optional="1">
-  <title>qinf360_orglat</title>
-  <row label="r1">Met (in person or video) with congressional, agency, or state legislative staff</row>
-  <row label="r2">Sat on the board or executive committee of any health, policy, or business association</row>
-  <row label="r3">Worked with or advised a Washington-based organization (think tank, patient advocacy group, trade association)</row>
-  <row label="r4">Testified or submitted written comments to a state legislative or Congressional committee</row>
-</checkbox>
-
-<checkbox 
-  label="qinf360_medialat"
-  keepWith="qinf360,qinf360_eliteup,qinf360_recruitup,qinf360_orglat,qinf360_down,qinf360_none"
-  optional="1">
-  <title>qinf360_medialat</title>
-  <row label="r1">Spoke at a public meeting, podcast, webinar, church or civic group on a health topic</row>
-  <row label="r2">Wrote an article, blog post, Substack, or op-ed on an issue</row>
-</checkbox>
-
-<checkbox 
-  label="qinf360_down"
-  keepWith="qinf360,qinf360_eliteup,qinf360_recruitup,qinf360_orglat,qinf360_medialat,qinf360_none"
-  optional="1">
-  <title>qinf360_down</title>
-  <row label="r1">Volunteered on a political campaign</row>
-  <row label="r2">Organized an event or rally on any issue</row>
-</checkbox>
-
-<checkbox 
-  label="qinf360_none"
-  keepWith="qinf360,qinf360_eliteup,qinf360_recruitup,qinf360_orglat,qinf360_medialat,qinf360_down"
-  optional="1">
-  <title>qinf360_none</title>
-  <row label="r1" exclusive="1"><span class="NoneOfThese">None of these</span></row>
-  <row label="rNIU" cond="1==2"><span class="NoneOfThese">NIU</span></row>
-</checkbox>
-
-<suspend/>
-
-<checkbox 
-  label="qlowinf"
-  atleast="1">
-  <title>In the past 12 months, have you taken any of the following actions related to a public policy issue?</title>
-  <row label="r1" groups="g1">Signed a petition</row>
-  <row label="r2" groups="g1">Attended a meeting</row>
-  <row label="r3" groups="g1">Donated money</row>
-  <row label="r7" exclusive="1" groups="g2" randomize="0"><span class="NoneOfThese">None of these</span></row>
-  <group label="g1" builder:axis="row" builder:default="1" where="none">no group</group>
-  <group label="g2" builder:axis="row">&amp;nbsp;&amp;nbsp;</group>
-</checkbox>
-
-<suspend/>
-
-<radio 
-  label="qtot_followers"
-  atm1d:large_maxWidth="180px"
-  atm1d:large_minWidth="180px"
-  atm1d:showInput="0"
-  atm1d:small_minWidth="100%"
-  atm1d:viewMode="tiled"
-  ss:listDisplay="1"
-  uses="atm1d.11">
-  <title>Across all your public social-media accounts about how many followers or subscribers do you have in total?</title>
-  <comment>Including from X/Twitter, Instagram, TikTok, Facebook pages, Substack, podcast, YouTube, etc</comment>
-  <row label="r1">0 None</row>
-  <row label="r2">&amp;lt;500</row>
-  <row label="r3">500 - 2,000</row>
-  <row label="r4">2,000 - 10,000</row>
-  <row label="r5"><div style="width:150px">10,000 - 50,000</div></row>
-  <row label="r6">50,000 +</row>
-</radio>
-
-<suspend/>
-
-<radio 
-  label="qsocialinfluence"
-  cardrating:btnlayout="tiled"
-  cardrating:lrg_maxwidth="100px"
-  cardrating:progress="0"
-  fir="off"
-  grouping="rows"
-  uses="cardrating.1">
-  <title>How many times over the past 30 days have you…</title>
-  <comment>Across any social media platform you use (Facebook, X, LinkedIn, TikTok, or others), Approximately how many times have you done any of the following to advocate on a public policy issue?</comment>
-  <col label="c1">Never</col>
-  <col label="c2">Not in the past 30 days</col>
-  <col label="c3">One time</col>
-  <col label="c4">2 - 4 times</col>
-  <col label="c5">5 + times</col>
-  <row label="r1"><b>Created an original post or video</b></row>
-  <row label="r2"><b>Shared or reposted content</b></row>
-  <row label="r3"><b>Commented or replied to posts</b></row>
-</radio>
-
-<suspend/>
-
-<select 
-  label="qpre_1"
-  minRanks="6"
-  optional="1"
-  ranksort:answersContainerCSS="width: 240px;"
-  shuffle="rows"
-  unique="none,cols"
-  uses="ranksort.8"
-  values="order">
-  <title><strong><span style="color: black;">People have different views about which health issues should be the top priority for elected officials. Please rank the following health issues from 1 (most important) to 6 (least important) based on how much you think elected officials should prioritize them</span></strong></title>
-  <comment>Click or drag each item into a rank position.</comment>
-  <row label="r1"><span style="font-size: 12pt;"><strong>HIV/AIDS</strong></span></row>
-  <row label="r2"><span style="font-size: 12pt;"><strong>Cancer</strong></span></row>
-  <row label="r3"><span style="font-size: 12pt;"><strong>Mental health and addiction</strong></span></row>
-  <row label="r4"><span style="font-size: 12pt;"><strong>Obesity and Diabetes</strong></span></row>
-  <row label="r5"><span style="font-size: 12pt;"><strong>Heart disease</strong></span></row>
-  <row label="r6"><span style="font-size: 12pt;"><strong>Alzheimer’s and dementia</strong></span></row>
-  <choice label="ch1" value="1"><span style="font-size: 8pt;">Most Important</span></choice>
-  <choice label="ch2" value="2"><span style="font-size: 8pt;">2nd most important</span></choice>
-  <choice label="ch3" value="3"><span style="font-size: 8pt;">3rd most important</span></choice>
-  <choice label="ch4" value="4"><span style="font-size: 8pt;">4th most important</span></choice>
-  <choice label="ch6" value="5"><span style="font-size: 8pt;">5th most important</span></choice>
-  <choice label="ch7" value="6"><span style="font-size: 8pt;">6th most important</span></choice>
-</select>
-
-<suspend/>
-
-<html label="cm4" where="survey">The questions that follow help us understand how you tend to engage and where your influence shows up. At the end of the survey, we’ll share a snapshot of your influence profile.</html>
-
-<html label="STIGMA_intro" where="survey"><div style="text-align:center; padding: 8px 0 20px;">
-    <div style="font-family:Inter,sans-serif; font-size:11px; font-weight:700;                 letter-spacing:.1em; text-transform:uppercase; color:#888888;                 margin-bottom:14px;">
-      Social and Health Attitudes
-    </div>
-    <p style="font-family:Fraunces,Georgia,serif; font-size:17px; color:#333333;               line-height:1.65; margin-bottom:16px;">
-      People have all kinds of views on health and how we treat each other.
-      Tell us where you fall on each of the following.  There is
-      no right answer, just yours.
-    </p>
-     </div></html>
-
-<radio 
-  label="TRUST"
-  builderHint="{&quot;rocochoName&quot;:&quot;radiogrid&quot;}"
-  shuffle="rows">
-  <title>Let's start with something everyone has an opinion about — who you actually trust. For each of the following, tell us how much you trust them to give you good information about health.</title>
-  <comment>How much do you trust each of the following to provide accurate health information?</comment>
-  <row label="r1"><span style="color: black;">Government regulatory agencies (such as the FDA, CDC)&amp;nbsp;&amp;nbsp;</span></row>
-  <row label="r2"><span style="color: black;">Pharmaceutical companies that develop and manufacture medicines </span></row>
-  <row label="r3"><span style="color: black;">Doctors and physicians, including your own personal doctor or primary care provider</span></row>
-  <row label="r4"><span style="color: black;">Infectious disease specialists</span></row>
-  <row label="r5">Nurses and nurse practitioners</row>
-  <row label="r6"><span style="color: black;">Pharmacists</span></row>
-  <row label="r7">Academic medical centers (Johns Hopkins, Mayo Clinic, Cleveland Clinic)</row>
-  <row label="r8"><span style="color: black;">Federally Qualified Health Centers (FQHCs) / Ryan White clinic networks</span></row>
-  <row label="r9">Catholic health systems (Ascension, CommonSpirit, Trinity Health)</row>
-  <row label="r10">Human Rights Campaign (HRC)</row>
-  <row label="r11">GLAAD</row>
-  <row label="r12">PFLAG</row>
-  <row label="r13">LGBTQ community centers</row>
-  <row label="r14">Health-focused podcasters and YouTube creators</row>
-  <row label="r15">Black media (Essence, EBONY, The Root, Black-owned radio)</row>
-  <row label="r16">Religious media (Christianity Today, Our Sunday Visitor, Catholic press)</row>
-  <row label="r17">LGBTQ media (The Advocate, them.)</row>
-  <row label="r18">Medical journals and cited sources (NEJM, JAMA, Lancet)</row>
-  <row label="r19">Science journalists</row>
-  <row label="r20">University HIV / AIDS research centers</row>
-  <row label="r21">amfAR — Foundation for AIDS Research</row>
-  <row label="r22">NMAC — National Minority AIDS Council</row>
-  <row label="r23">AIDS United</row>
-  <col label="c1">Do Not Trust At All (1)</col>
-  <col label="c2">(2)</col>
-  <col label="c3">(3)</col>
-  <col label="c4">Neutral / No Opinion (4)</col>
-  <col label="c6">(5)</col>
-  <col label="c8">(6)</col>
-  <col label="c9">Trust A Great Deal (7)</col>
-</radio>
-
-<radio 
-  label="STIGMA_ATT"
-  cardrating:btnlayout="horizontal"
-  cardrating:progress="0"
-  fir="off"
-  grouping="rows"
-  shuffle="rows"
-  ss:questionClassNames="rnd_cardrating"
-  uses="cardrating.1">
-  <title>Indicate how much you agree or disagree with each statement.</title>
-  <col label="c1"><span style="color:#C62828;">Strongly<br />DISAGREE</span></col>
-  <col label="c2">Disagree</col>
-  <col label="c3">Somewhat<br />Disagree</col>
-  <col label="c4">Neither /<br />Neutral</col>
-  <col label="c5">Somewhat<br />Agree</col>
-  <col label="c6">Agree</col>
-  <col label="c7"><span style="color:#2E7D32;">Strongly<br />AGREE</span></col>
-  <col label="c8">Prefer not to answer</col>
-  <row label="HIVSTIGMA_SB1">People who became infected with HIV through sexual behavior made choices that led to their situation.</row>
-  <row label="HIVSTIGMA_SB2">When someone contracts HIV as a result of their own behavior, they bear more responsibility for dealing with the consequences than someone who became ill in other ways.</row>
-  <row label="HIVSTIGMA_SD1">I would be comfortable working closely alongside a colleague I knew was HIV-positive.</row>
-  <row label="HIVSTIGMA_SD2">I would be comfortable having a close personal friendship with someone who is living with HIV.</row>
-  <row label="MHS_EQ1">Gay and lesbian people have been pushing harder for rights and recognition than is really necessary.</row>
-  <row label="MHS_EQ2">The amount of attention given to the concerns of gay and lesbian people in public life has gone beyond what the situation actually calls for.</row>
-  <row label="MHS_SC1">I would be comfortable living in a neighborhood where gay or lesbian couples were among my neighbors.</row>
-  <row label="MHS_SC2">In most everyday social situations, I am comfortable around people who are gay or lesbian.</row>
-  <row label="MHS_EQ1_CTL">People who face discrimination based on their religious beliefs or political views deserve the same legal protections as other groups.</row>
-  <row label="MHS_EQ2_CTL">In recent years, some groups have received more attention and sympathy in public life than is really warranted.</row>
-  <row label="STIGMA_SB_CTL1">People who develop Type 2 diabetes as a result of poor diet and lack of exercise are largely responsible for their own condition.</row>
-  <row label="STIGMA_SB_CTL2">People who struggle with alcohol or drug addiction deserve the same compassion as people with other medical conditions.</row>
-  <row label="STIGMA_SD_CTL1">I would feel comfortable working alongside a colleague I knew had been treated for depression or anxiety.</row>
-  <row label="A1"><span style="color: black;">There are important issues I care about, but don’t always make time to act on.</span></row>
-  <row label="A6"><span style="color: black;">Sharing my views publicly is just as important as taking concrete steps to change policy.</span></row>
-  <row label="V1"><span style="color: black;">To confirm you are able to read the screen, please select option below for “Strongly Agree"</span></row>
-</radio>
-
-<style mode="after" name="respview.client.css" with="qmaha_aware"><![CDATA[
-<style>
-
-
-
-/* Hide the native radio but keep it functional for the <label for="…"> */
-input[id="ans22330.0.9"] {
-  position: absolute !important;
-  opacity: 0 !important;
-  width: 0 !important;
-  height: 0 !important;
-  pointer-events: none; /* optional: prevents stray clicks on the invisible input */
-}
-
-/* Hide the adjacent FIR custom icon for this specific radio */
-input[id="ans22330.0.9"] + span.fir-icon {
-  display: none !important;
-}
-
-#question_qmaha_percep .cell-sub-wrapper:has(input[id='ans22330.0.9']:checked) .cell-text label .NoneOfThese {
-  background: #6B7F4E !important;
-  color: #fff !important;
-  border-color: #6B7F4E !important;
-}
-
-
-/* qmaha_impression css */
-
-.fir-icon {
-  width: unset;
-  height: unset;
-}
-
-.grid.grid-table-mode.setWidth {
-  max-width: 600px;
-}
-
-.grid-table-mode .nonempty {
-  border: unset;
-}
-
-.col-legend {
-  background-color: unset;
-}
-
-#question_qmaha_impression input[type="radio"] + span.fir-icon svg {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  border-radius: 50%;
-  /* border: 2px solid #C5C0B8; */
-  /* background: radial-gradient(circle at 35% 35%, #FAFAFA, #E8E4DE); */
-  box-shadow: 0 2px 6px rgba(0,0,0,.12), inset 0 1px 2px rgba(255,255,255,.6);
-  cursor: pointer;
-  transition: all .2s ease;
-  outline: none;
-}
-
-#question_qmaha_impression .fir-icon svg:hover {
-  transform: scale(1.08);
-}
-
-  /* --- HHIX106 color mapping: c1 = red, c4 = gray, c7 = red --- */
-
-  /* Neutralize earlier global overrides just for this question */
-  #question_qmaha_impression .fir-icon.selected .rounded .fir-selected,
-  #question_qmaha_impression .fir-icon.selected .square  .fir-selected {
-    /* Let column-specific rules below control the color */
-    fill: inherit !important;
-  }
-
-  /* Smooth transition for hover preview */
-  #question_qmaha_impression .fir-selected {
-    transition: fill .15s ease;
-  }
-
-  /* Column 1 (Strongly Disagree) -> RED when selected or hovered */
-  #question_qmaha_impression td[headers~="qmaha_impression_c1"] .fir-icon.selected .fir-selected,
-  #question_qmaha_impression td[headers~="qmaha_impression_c1"]:hover               .fir-selected {
-    fill: #C62828 !important;
-  }
-  
-  /* Column 2 (Strongly Disagree) -> RED when selected or hovered */
-  #question_qmaha_impression td[headers~="qmaha_impression_c2"] .fir-icon.selected .fir-selected,
-  #question_qmaha_impression td[headers~="qmaha_impression_c2"]:hover               .fir-selected {
-    fill: #EF5350 !important;
-  }
-  
-  /* Column 3 (Strongly Disagree) -> RED when selected or hovered */
-  #question_qmaha_impression td[headers~="qmaha_impression_c3"] .fir-icon.selected .fir-selected,
-  #question_qmaha_impression td[headers~="qmaha_impression_c3"]:hover               .fir-selected {
-    fill: #BDBDBD !important;
-  }
-
-  /* Column 4 (Neutral/Unsure) -> GRAY when selected or hovered */
-  #question_qmaha_impression td[headers~="qmaha_impression_c4"] .fir-icon.selected .fir-selected,
-  #question_qmaha_impression td[headers~="qmaha_impression_c4"]:hover               .fir-selected {
-    fill: #66BB6A !important;
-  }
-
-  /* Column 5 (Neutral/Unsure) -> GRAY when selected or hovered */
-  #question_qmaha_impression td[headers~="qmaha_impression_c5"] .fir-icon.selected .fir-selected,
-  #question_qmaha_impression td[headers~="qmaha_impression_c5"]:hover               .fir-selected {
-    fill: #2E7D32 !important;
-  }
-
-    </style>
-]]></style>
-<style mode="after" name="respview.client.js" with="qmaha_aware" wrap="ready"><![CDATA[
-// Hide initially
-jQuery('#question_qmaha_percep').hide();
-jQuery('#question_qmaha_impression').hide();
-jQuery('#question_qmaha_id').hide();
-jQuery('#question_qmaha_idx99').hide();
-
-/* qmaha_percep showing conditions if qmaha_aware is answered */
-
-// Cache selectors
-const $awareRadios   = jQuery("#question_qmaha_aware input[type='radio']");
-const $awareChecks   = jQuery("#question_qmaha_awarex99 input[type='checkbox']");
-const $percepBlock   = jQuery('#question_qmaha_percep');
-const $percepRadios1 = $percepBlock.find('input[type="radio"]'); // distinct var name
-
-// Helper to update visibility
-function updatePercepVisibility() {
-  // true if any 'aware' radio OR any 'awarex99' checkbox is checked
-  //const anyChecked = $awareRadios.is(':checked') || $awareChecks.is(':checked');
-  //Updated for r1 - Very Familiar, r2 - Somewhat Familiar, r3 - Aware, but not sure what it means
-  const anyChecked =
-    jQuery("#question_qmaha_aware input[id='ans22297.0.0']").is(':checked') ||
-    jQuery("#question_qmaha_aware input[id='ans22297.0.1']").is(':checked') ||
-    jQuery("#question_qmaha_aware input[id='ans22297.0.2']").is(':checked');
-    
-  // Show/hide target section
-  $percepBlock.toggle(anyChecked);
-
-  // If nothing is checked upstream, clear percep radios and notify listeners
-  if (!anyChecked) {
-    $percepRadios1.prop('checked', false).trigger('change');
-  }
-}
-
-// 1) Set the correct state once on load (covers pre-checked cases)
-jQuery(updatePercepVisibility);
-
-// 2) Toggle on change (event delegation for dynamic elements)
-jQuery(document).on(
-  'change',
-  "#question_qmaha_aware input[type='radio'], #question_qmaha_awarex99 input[type='checkbox']",
-  updatePercepVisibility
-);
-
-// Disable/enable aware radios based on awarex99 checkbox; clear radios when checkbox is checked
-jQuery(document).on('change', "#question_qmaha_awarex99 input[type='checkbox']", function () {
-  const isChecked = jQuery(this).is(":checked");
-  const $awareRadioInputs = jQuery('#question_qmaha_aware input[type="radio"]');
-
-  if (isChecked) {
-    $awareRadioInputs.prop("checked", false).trigger("change");
-    $awareRadioInputs.prop("disabled", true);
-  } else {
-    $awareRadioInputs.prop("disabled", false);
-  }
-
-  // After toggling disabled/checked states, ensure percep visibility is accurate
-  updatePercepVisibility();
-});
-
-
-/* qmaha_impression showing conditions if qmaha_percep is answered */
-
-// Cache selectors
-const $percepRadios2     = jQuery("#question_qmaha_percep input[type='radio']"); // distinct var name
-const $impressionBlock   = jQuery('#question_qmaha_impression');
-const $impressionRadios  = $impressionBlock.find('input[type="radio"]');
-
-// Helper to update visibility
-function updateImpressionVisibility() {
-  const anyChecked = $percepRadios2.is(':checked');
-
-  // Show/hide the impression block
-  $impressionBlock.toggle(anyChecked);
-
-  // If none of the percep radios are checked, clear impression radios and notify
-  if (!anyChecked) {
-    $impressionRadios.prop("checked", false).trigger("change");
-  }
-}
-
-// 1) Set correct state once on load (handles pre-checked radios)
-jQuery(updateImpressionVisibility);
-
-// 2) Toggle on radio change (event delegation-safe)
-jQuery(document).on(
-  'change',
-  "#question_qmaha_percep input[type='radio']",
-  updateImpressionVisibility
-);
-
-
-/* question_qmaha_id showing conditions if qmaha_impression is answered */
-
-// Cache selectors
-const $impressionRadios2 = jQuery("#question_qmaha_impression input[type='radio']"); // distinct var name
-const $qmahaIdBlock      = jQuery('#question_qmaha_id');
-const $qmahaIdxBlock     = jQuery('#question_qmaha_idx99'); // added
-
-const $qmahaIdRadios     = $qmahaIdBlock.find('input[type="radio"]');
-const $qmahaIdCheckbox     = $qmahaIdBlock.find('input[type="radio"]');
-
-// Helper to update visibility
-function updateQmahaIdVisibility() {
-  const anyChecked = $impressionRadios2.is(':checked');
-
-  // Show/hide the qmaha_id and qmaha_idx99 blocks
-  $qmahaIdBlock.toggle(anyChecked);
-  $qmahaIdxBlock.toggle(anyChecked); // added
-
-  // If none of the impression radios are checked, clear qmaha_id radios and notify
-  if (!anyChecked) {
-    $qmahaIdRadios.prop("checked", false).trigger("change");
-	$qmahaIdCheckbox.prop("checked", false).trigger("change");
-  }
-}
-
-// 1) Set correct state once on load (handles pre-checked radios)
-jQuery(updateQmahaIdVisibility);
-
-// 2) Toggle on radio change (event delegation-safe)
-jQuery(document).on(
-  'change',
-  "#question_qmaha_impression input[type='radio']",
-  updateQmahaIdVisibility
-);
-
-
-// Disable/enable aware radios based on qmaha_idx99 checkbox; clear radios when checkbox is checked
-jQuery(document).on('change', "#question_qmaha_idx99 input[type='checkbox']", function () {
-  const isChecked2 = jQuery(this).is(":checked");
-  const $awareRadioInputs2 = jQuery('#question_qmaha_id input[type="radio"]');
-
-  if (isChecked2) {
-    $awareRadioInputs2.prop("checked", false).trigger("change");
-    $awareRadioInputs2.prop("disabled", true);
-  } else {
-    $awareRadioInputs2.prop("disabled", false);
-  }
-
-  // After toggling disabled/checked states, ensure percep visibility is accurate
-  updateQmahaIdVisibility();
-});
-]]></style>
-<radio 
-  label="qmaha_aware"
-  atm1d:large_maxWidth="110px"
-  atm1d:large_minWidth="100px"
-  atm1d:showInput="0"
-  atm1d:viewMode="tiled"
-  keepWith="qmaha_awarex99,qmaha_percep,qmaha_impression,qmaha_id,qmaha_idx99"
-  optional="1"
-  ss:listDisplay="1"
-  uses="atm1d.11">
-  <title>How familiar are you with the term ‘MAHA’ (Make America Healthy Again)?</title>
-  <comment>Select one</comment>
-  <validate>
-if not(qmaha_aware.any) and not(qmaha_awarex99.any):
-	error(res.sys_noAnswerSelected)
-	
-elif (qmaha_aware.r1 or qmaha_aware.r2 or qmaha_aware.r3) and not(qmaha_percep.any and qmaha_impression.any and (qmaha_id.any or qmaha_idx99.any)):
-	error(res.sys_noAnswerSelected)
-  </validate>
-
-  <row label="r1">Very Familiar</row>
-  <row label="r2">Somewhat Familiar</row>
-  <row label="r3">Aware, but not sure what it means</row>
-  <row label="r4">Heard of it, but know nothing about it</row>
-  <row label="r5">Never heard of it</row>
-</radio>
-
-<checkbox 
-  label="qmaha_awarex99"
-  keepWith="qmaha_aware,qmaha_percep,qmaha_impression,qmaha_id,qmaha_idx99">
-  <title>New Multi-Select Question</title>
-  <row label="r1">Prefer not to respond</row>
-</checkbox>
-
-<radio 
-  label="qmaha_percep"
-  keepWith="qmaha_aware,qmaha_awarex99,qmaha_impression,qmaha_id,qmaha_idx99"
-  optional="1">
-  <title>When you hear the term MAHA, what does it most closely represent to you?</title>
-  <comment>Select one</comment>
-  <row label="r1" groups="g1">A movement focused on food quality, nutrition, and chronic disease</row>
-  <row label="r2" groups="g1">A broader critique of drug and food companies, and the health system</row>
-  <row label="r3" groups="g1">A political slogan more than a real movement</row>
-  <row label="r4" groups="g1">A personal health or lifestyle philosophy</row>
-  <row label="r5" groups="g1">A fringe or extreme health movement</row>
-  <row label="r6" groups="g1">The movement around Robert F. Kennedy, Jr.</row>
-  <row label="r7" groups="g1">The health movement led by Donald Trump</row>
-  <row label="r8" groups="g1">Something unclear or hard to define</row>
-  <row label="r9" groups="g1" open="1" openSize="25" randomize="0">Something else</row>
-  <row label="r10" groups="g2"><span class="NoneOfThese">Not Sure</span></row>
-  <group label="g1" builder:axis="row" builder:default="1" where="none">no group</group>
-  <group label="g2" builder:axis="row">&amp;nbsp;&amp;nbsp;</group>
-</radio>
-
-<radio 
-  label="qmaha_impression"
-  colLegend="bottom"
-  keepWith="qmaha_aware,qmaha_awarex99,qmaha_percep,qmaha_id,qmaha_idx99"
-  optional="1"
-  surveyDisplay="desktop">
-  <title>Overall, what is your impression of the MAHA movement or idea?</title>
-  <col label="c1"><span style="color: #cc0000;">VERY<br /> Unfavorable</span></col>
-  <col label="c2"><span style="color: #cc0000;">Somewhat<br /> Unfavorable</span></col>
-  <col label="c3"><span style="color: #737374;">Neutral/<br /> Unsure</span></col>
-  <col label="c4"><span style="color: #40921e;">Somewhat<br /> Favorable</span></col>
-  <col label="c5"><span style="color: #40921e;">VERY<br /> Favorable</span></col>
-</radio>
-
-<radio 
-  label="qmaha_id"
-  keepWith="qmaha_aware,qmaha_awarex99,qmaha_percep,qmaha_impression,qmaha_idx99"
-  optional="1">
-  <title>Which best describes your relationship to the MAHA label?</title>
-  <comment>Select one</comment>
-  <row label="r1">I am a member of the national organization</row>
-  <row label="r2">I strongly identify with it</row>
-  <row label="r3">I somewhat identify with it</row>
-  <row label="r4">I agree with some of the ideas, but wouldn’t identify with it</row>
-  <row label="r5">I’ve heard of it, but don’t relate to it</row>
-  <row label="r6">I disagree with it</row>
-  <row label="r7">I’m unfamiliar with it</row>
-</radio>
-
-<checkbox 
-  label="qmaha_idx99"
-  keepWith="qmaha_aware,qmaha_awarex99,qmaha_percep,qmaha_impression,qmaha_id">
-  <title>New Multi-Select Question</title>
-  <row label="r1">Prefer not to respond</row>
-</checkbox>
-
-<suspend/>
-
-<style mode="after" name="respview.client.js" with="cm2" wrap="ready"><![CDATA[
-document.getElementById('btn_continue').setAttribute('value', 'ALMOST DONE');
-]]></style>
-<html label="cm2" where="survey">We promise this is the last stretch. <br /><br />Just a few background questions so we can see how different walks of life connect with different ways of thinking.</html>
-
-<suspend/>
-
-<style mode="after" name="respview.client.css" with="d2"><![CDATA[
-<style>
-
-
-fieldset.atm1d .answers > div > div {
-  border: unset !important;
-    margin: 10px 10px;
-}
-
-
-fieldset.atm1d .answers > div label[for="ans22753.0.0"] {
-    width: 78px;
-    height: 78px;
-    border-radius: 50%;
-    background: #2E7D32 !important;
-    color: #FFF !important;
-    font-size: 30px;
-}
-
-
-fieldset.atm1d .answers > div label[for="ans22753.0.1"] {
-	width: 78px;
-    height: 78px;
-    border-radius: 50%;
-    background: #C62828 !important;
-    color: #FFF !important;
-    font-size: 30px;
-}
-
-
-.showInput_0:hover {
-    transform: scale(1.06);
-    box-shadow: 0 5px 16px rgba(0,0,0,.18);
-}
-
-
-/* Apply box-shadow ONLY when the radio is selected */
-input[type="radio"]:checked + .showInputParent_0 label {
-  box-shadow: 0 0 0 4px rgba(107, 127, 78, .35), 
-              0 3px 10px rgba(0, 0, 0, .15);
-}
-
-    </style>
-]]></style>
-<radio 
-  label="d2"
-  atm1d:showInput="0"
-  atm1d:viewMode="tiled"
-  keepWith="d2x99"
-  optional="1"
-  ss:listDisplay="1"
-  uses="atm1d.11">
-  <title>Are you of Hispanic or Latino background?</title>
-  <validate>
-if not(d2.any) and not(d2x99.any):
-	error(res.sys_noAnswerSelected)
-  </validate>
-
-  <row label="r1">✓</row>
-  <row label="r2">✕</row>
-</radio>
-
-<checkbox 
-  label="d2x99"
-  keepWith="d2">
-  <title>New Multi-Select Question</title>
-  <row label="r1">Prefer not to respond</row>
-</checkbox>
-
-<suspend/>
-
-<radio 
-  label="d3">
-  <title>Which best describes your race?
-</title>
-  <row label="r1">White</row>
-  <row label="r2">Black</row>
-  <row label="r3">Asian</row>
-  <row label="r4" open="1" openSize="25" randomize="0">Other</row>
-</radio>
-
-<suspend/>
-
-<style mode="after" name="respview.client.css" with="VET"><![CDATA[
-<style>
-
-
-
-
-fieldset.atm1d .answers > div > div {
-  border: unset !important;
-  margin: 10px 10px;
-}
-
-/*
-fieldset.atm1d .answers > div label[for="ans19043.0.0"] {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background-image: url("https://emea.focusvision.com/survey/selfserve/21a7/260129/Salute.png");
-    //background: #2E7D32 !important;
-    color: #fff !important;
-    font-size: 10px;
-}
-*/
-
-
-fieldset.atm1d .answers > div label[for="ans19043.0.0"], fieldset.atm1d .answers > div label[for="ans19043.0.1"] {
-    width: 78px;
-    height: 78px;
-    border-radius: 50%;
-    background: #2E7D32 !important;
-    color: #FFF !important;
-    font-size: 30px;
-}
-
-fieldset.atm1d .answers > div label[for="ans19043.0.2"] {
-	width: 78px;
-    height: 78px;
-    border-radius: 50%;
-    background: #C62828 !important;
-    color: #FFF !important;
-    font-size: 30px;
-    margin-left: 50px;
-}
-
-
-.showInput_0:hover {
-    transform: scale(1.06);
-    box-shadow: 0 5px 16px rgba(0,0,0,.18);
-}
-
-
-/* Apply box-shadow ONLY when the radio is selected */
-input[type="radio"]:checked + .showInputParent_0 label {
-  box-shadow: 0 0 0 4px rgba(107, 127, 78, .35), 
-              0 3px 10px rgba(0, 0, 0, .15);
-}
-
-.appended {
-text-align: center;
-padding-left: 74px;
-}
-
-.appendedx1 {
-text-align: center;
-padding-left: 5px;
-}
-    </style>
-]]></style>
-<style name="respview.client.js" with="VET" wrap="ready"><![CDATA[
-jQuery('label[for="ans19043.0.0"]').parent().after('<div class="appendedx1">YES - <br/>ACTIVE<br/> DUTY</div>');
-jQuery('label[for="ans19043.0.1"]').parent().after('<div class="appendedx1">YES -<br/> VETERAN</div>');
-jQuery('label[for="ans19043.0.2"]').parent().after('<div class="appended">NO</div>');
-
-
-setInterval(function () {
-  const isChecked = jQuery("input[type='checkbox']").is(":checked");
-
-  if (isChecked) {
-    jQuery('input[type="radio"]').prop("checked", false).trigger("change");
-    jQuery('input[type="radio"]').prop("disabled", true);
-  } else {
-    jQuery('input[type="radio"]').prop("disabled", false);
-  }
-}, 100);
-]]></style>
-<radio 
-  label="VET"
-  atm1d:showInput="0"
-  atm1d:viewMode="tiled"
-  keepWith="VETx99"
-  optional="1"
-  ss:listDisplay="1"
-  uses="atm1d.11">
-  <title>Have you ever served on active duty in the U.S. Armed Forces, Reserves, or National Guard?</title>
-  <validate>
-if not(VET.any) and not(VETx99.any):
-	error(res.sys_noAnswerSelected)
-  </validate>
-
-  <row label="r1">✓</row>
-  <row label="r2">✓</row>
-  <row label="r3">✕</row>
-</radio>
-
-<checkbox 
-  label="VETx99"
-  keepWith="VET">
-  <title>New Multi-Select Question</title>
-  <row label="r1">Prefer not to respond</row>
-</checkbox>
-
-<suspend/>
-
-<style mode="after" name="respview.client.css" with="UNION"><![CDATA[
-<style>
-
-
-fieldset.atm1d .answers > div > div {
-  border: unset !important;
-    margin: 10px 10px;
-}
-
-
-fieldset.atm1d .answers > div label[for="ans19057.0.0"] {
-    width: 78px;
-    height: 78px;
-    border-radius: 50%;
-    background: #2E7D32 !important;
-    color: #FFF !important;
-    font-size: 30px;
-}
-
-
-fieldset.atm1d .answers > div label[for="ans19057.0.1"] {
-	width: 78px;
-    height: 78px;
-    border-radius: 50%;
-    background: #C62828 !important;
-    color: #FFF !important;
-    font-size: 30px;
-}
-
-
-.showInput_0:hover {
-    transform: scale(1.06);
-    box-shadow: 0 5px 16px rgba(0,0,0,.18);
-}
-
-
-/* Apply box-shadow ONLY when the radio is selected */
-input[type="radio"]:checked + .showInputParent_0 label {
-  box-shadow: 0 0 0 4px rgba(107, 127, 78, .35), 
-              0 3px 10px rgba(0, 0, 0, .15);
-}
-
-.appended {
-padding-left: 25px;
-}
-
-    </style>
-]]></style>
-<style name="respview.client.js" with="UNION" wrap="ready"><![CDATA[
-jQuery('label[for="ans19057.0.0"]').parent().after('<div class="appended"><center>YES</center></div>');
-jQuery('label[for="ans19057.0.1"]').parent().after('<div class="appended">NO</div>');
-
-
-setInterval(function () {
-  const isChecked = jQuery("input[type='checkbox']").is(":checked");
-
-  if (isChecked) {
-    jQuery('input[type="radio"]').prop("checked", false).trigger("change");
-    jQuery('input[type="radio"]').prop("disabled", true);
-  } else {
-    jQuery('input[type="radio"]').prop("disabled", false);
-  }
-}, 100);
-]]></style>
-<radio 
-  label="UNION"
-  atm1d:showInput="0"
-  atm1d:viewMode="tiled"
-  keepWith="UNIONx99"
-  optional="1"
-  ss:listDisplay="1"
-  uses="atm1d.11">
-  <title>Are you currently, or have you ever been, part of a labor union?</title>
-  <validate>
-if not(UNION.any) and not(UNIONx99.any):
-	error(res.sys_noAnswerSelected)
-  </validate>
-
-  <row label="r1">✓</row>
-  <row label="r3">✕</row>
-</radio>
-
-<checkbox 
-  label="UNIONx99"
-  keepWith="UNION">
-  <title>New Multi-Select Question</title>
-  <row label="r1">Prefer not to respond</row>
-</checkbox>
-
-<suspend/>
-
-<radio 
-  label="edu"
-  atm1d:large_maxWidth="180px"
-  atm1d:large_minWidth="180px"
-  atm1d:showInput="0"
-  atm1d:small_minWidth="100%"
-  atm1d:viewMode="tiled"
-  keepWith="edux99"
-  optional="1"
-  ss:listDisplay="1"
-  uses="atm1d.11">
-  <title>Please indicate the highest level of school you completed or the highest degree you have received…</title>
-  <validate>
-if not(edu.any) and not(edux99.any):
-	error(res.sys_noAnswerSelected)
-  </validate>
-
-  <row label="r1">Did not finish high school</row>
-  <row label="r2">High school diploma or GED</row>
-  <row label="r3">Some college credit, no degree</row>
-  <row label="r4">Trade/technical/vocational training</row>
-  <row label="r5">Associate’s degree</row>
-  <row label="r6">Bachelor’s degree</row>
-  <row label="r7">Master’s degree</row>
-  <row label="r8">Professional degree (JD, MD)</row>
-  <row label="r9">Doctorate degree (PhD)</row>
-</radio>
-
-<checkbox 
-  label="edux99"
-  keepWith="edu">
-  <title>New Multi-Select Question</title>
-  <row label="r1">Prefer not to respond</row>
-</checkbox>
-
-<suspend/>
-
-<select 
-  label="REL"
-  keepWith="RELx99"
-  optional="1">
-  <title>What is your present religion, if any?</title>
-  <validate>
-if not(REL.any) and not(RELx99.any):
-	error(res.sys_noAnswerSelected)
-  </validate>
-
-  <choice label="ch1">Protestant</choice>
-  <choice label="ch2">Roman Catholic</choice>
-  <choice label="ch3">LDS/Mormon</choice>
-  <choice label="ch4">Orthodox, such as Greek or Russian Orthodox</choice>
-  <choice label="ch5">Jewish</choice>
-  <choice label="ch6">Muslim</choice>
-  <choice label="ch7">Buddhist</choice>
-  <choice label="ch8">Hindu</choice>
-  <choice label="ch9">Atheist</choice>
-  <choice label="ch10">Agnostic</choice>
-  <choice label="ch11">Something else</choice>
-  <choice label="ch12">Nothing in particular</choice>
-</select>
-
-<checkbox 
-  label="RELx99"
-  keepWith="REL">
-  <title>New Multi-Select Question</title>
-  <row label="r1">Prefer not to respond</row>
-</checkbox>
-
-<suspend/>
-
-<style mode="after" name="respview.client.css" with="evangel"><![CDATA[
-<style>
-
-
-fieldset.atm1d .answers > div > div {
-  border: unset !important;
-    margin: 10px 10px;
-}
-
-
-fieldset.atm1d .answers > div label[for="ans22832.0.0"] {
-    width: 78px;
-    height: 78px;
-    border-radius: 50%;
-    background: #2E7D32 !important;
-    color: #FFF !important;
-    font-size: 15px;
-}
-
-
-fieldset.atm1d .answers > div label[for="ans22832.0.1"] {
-	width: 78px;
-    height: 78px;
-    border-radius: 50%;
-    background: #C62828 !important;
-    color: #FFF !important;
-    font-size: 15px;
-}
-
-
-.showInput_0:hover {
-    transform: scale(1.06);
-    box-shadow: 0 5px 16px rgba(0,0,0,.18);
-}
-
-
-/* Apply box-shadow ONLY when the radio is selected */
-input[type="radio"]:checked + .showInputParent_0 label {
-  box-shadow: 0 0 0 4px rgba(107, 127, 78, .35), 
-              0 3px 10px rgba(0, 0, 0, .15);
-}
-
-    </style>
-]]></style>
-<radio 
-  label="evangel"
-  cond="REL.ch1"
-  atm1d:showInput="0"
-  atm1d:viewMode="tiled"
-  ss:listDisplay="1"
-  uses="atm1d.11">
-  <title>Would you describe yourself a born-again or evangelical Christian, or not?</title>
-  <row label="r1">YES</row>
-  <row label="r2">NO</row>
-</radio>
-
-<suspend/>
-
-<select 
-  label="income"
-  keepWith="incomeX99"
-  optional="1">
-  <title>Last year – that is, in 2025 – what was your total family income from all sources, before taxes…</title>
-  <validate>
-if not(income.any) and not(incomeX99.any):
-	error(res.sys_noAnswerSelected)
-  </validate>
-
-  <choice label="ch1">Less than $10,000</choice>
-  <choice label="ch2">$10,000 – $19,999</choice>
-  <choice label="ch3">$20,000 – $29,999</choice>
-  <choice label="ch4">$30,000 – $39,999</choice>
-  <choice label="ch5">$40,000 – $49,999</choice>
-  <choice label="ch6">$50,000 – $59,999</choice>
-  <choice label="ch7">$60,000 – $69,999</choice>
-  <choice label="ch8">$70,000 – $79,999</choice>
-  <choice label="ch9">$80,000 – $89,999</choice>
-  <choice label="ch10">$90,000 – $99,999</choice>
-  <choice label="ch11">$100,000 – $124,999</choice>
-  <choice label="ch12">$125,000 – $149,999</choice>
-  <choice label="ch13">$150,000 – $199,999</choice>
-  <choice label="ch14">$200,000 – $499,999</choice>
-  <choice label="ch15">$500,000 or more</choice>
-</select>
-
-<checkbox 
-  label="incomeX99"
-  keepWith="income">
-  <title>New Multi-Select Question</title>
-  <row label="r1">Prefer not to respond</row>
-</checkbox>
-
-<suspend/>
-
-<text 
-  label="optin_email"
-  optional="0"
-  ss:listDisplay="0"
-  verify="email">
-  <title>Please share your email address to see which PRISM segment you are most closely aligned with.</title>
-  <comment>Email address:</comment>
+<text label="SEG1_LABEL" cond="0" size="60" where="execute,survey,report">
+  <title>Hidden: Primary segment label (display)</title>
+</text>
+<text label="SEG2_LABEL" cond="0" size="60" where="execute,survey,report">
+  <title>Hidden: Secondary segment label (display)</title>
+</text>
+<text label="SEG1_PCT" cond="0" size="10" where="execute,survey,report">
+  <title>Hidden: Primary segment probability (display)</title>
+</text>
+<text label="SEG2_PCT" cond="0" size="10" where="execute,survey,report">
+  <title>Hidden: Secondary segment probability (display)</title>
 </text>
 
-<suspend/>
+<exec>
+seg_names = [
+    "Trust-the-Science Pragmatists (TSP)",
+    "Consumer Empowerment Champions (CEC)",
+    "Traditional Conservatives (TC)",
+    "Health Futurist (HF)",
+    "Price Populists (PP)",
+    "Wellness Evangelists (WE)",
+    "Paleo Freedom Fighters (PFF)",
+    "Holistic Health Naturalists (HHN)",
+    "Medical Freedom Libertarians (MFL)",
+    "Vaccine Skeptics (VS)",
+    "Universal Care Progressives (UCP)",
+    "Faith and Justice Progressives (FJP)",
+    "Health Care Protectionists (HCP)",
+    "Health Abundance Democrats (HAD)",
+    "Health Care Incrementalists (HCI)",
+    "Global Health Institutionalists (GHI)",
+]
 
-<term label="te1" cond="1">This text will appear in the Response Summary</term>
+seg1_idx = int(XSEG_ASSIGNED.val) if XSEG_ASSIGNED.any else 0
+seg1_pct = 0.0
+seg2_idx = 0
+seg2_pct = 0.0
 
-<suspend/>
+if TYPING_MODULE.r3:
+    gop_sorted = sorted(enumerate(p.gop_prob), key=lambda x: -x[1])
+    dem_sorted = sorted(enumerate(p.dem_prob), key=lambda x: -x[1])
+    if max(p.gop_prob) &gt;= max(p.dem_prob):
+        seg1_pct = gop_sorted[0][1]
+        gop2_idx = gop_sorted[1][0] + 1
+        gop2_pct = gop_sorted[1][1]
+        dem1_idx = dem_sorted[0][0] + 11
+        dem1_pct = dem_sorted[0][1]
+        if gop2_pct &gt;= dem1_pct:
+            seg2_idx = gop2_idx
+            seg2_pct = gop2_pct
+        else:
+            seg2_idx = dem1_idx
+            seg2_pct = dem1_pct
+    else:
+        seg1_pct = dem_sorted[0][1]
+        dem2_idx = dem_sorted[1][0] + 11
+        dem2_pct = dem_sorted[1][1]
+        gop1_idx = gop_sorted[0][0] + 1
+        gop1_pct = gop_sorted[0][1]
+        if dem2_pct &gt;= gop1_pct:
+            seg2_idx = dem2_idx
+            seg2_pct = dem2_pct
+        else:
+            seg2_idx = gop1_idx
+            seg2_pct = gop1_pct
+elif XGOP_SEG_FINAL_1.any:
+    gop_sorted = sorted(enumerate(p.gop_prob), key=lambda x: -x[1])
+    seg1_pct = gop_sorted[0][1]
+    seg2_idx = gop_sorted[1][0] + 1
+    seg2_pct = gop_sorted[1][1]
+elif XDEM_SEG_FINAL_1.any:
+    dem_sorted = sorted(enumerate(p.dem_prob), key=lambda x: -x[1])
+    seg1_pct = dem_sorted[0][1]
+    seg2_idx = dem_sorted[1][0] + 11
+    seg2_pct = dem_sorted[1][1]
 
-<html label="cm3" where="survey"><p>To help us better understand how people encounter and engage with information about health, this section asks about the media, platforms, and voices that shape your information environment.</p>
-<p></p>
-<div></div>
-<p><br />These questions help us understand where you go for information, who you trust, and how different sources influence the way you think about health and healthcare.</p></html>
-
-<suspend/>
-
-<style mode="after" name="respview.client.css" with="HHIX100"><![CDATA[
-<style>
-
-.cell-sub-column {
-  vertical-align: top;
-}
-
-    </style>
-]]></style>
-<checkbox 
-  label="HHIX100"
-  atleast="1">
-  <title>Which of the following do you use to get health or political information? Select all that apply.</title>
-  <comment>Include any platform you use at least occasionally — it doesn't have to be your main source.</comment>
-  <row label="r1" groups="g1"><strong>Podcasts <br /></strong>Audio shows you stream or download</row>
-  <row label="r2" groups="g1"><strong>YouTube</strong><br />Video content on YouTube</row>
-  <row label="r3" groups="g1"><strong>Facebook</strong><br />Posts, groups, or pages on Facebook</row>
-  <row label="r4" groups="g1"><strong>X (Twitter)</strong><br />Posts and threads on X</row>
-  <row label="r5" groups="g1"><strong>Instagram</strong><br />Posts, reels, or stories on Instagram</row>
-  <row label="r6" groups="g1"><strong>TikTok</strong><br />Short videos on TikTok</row>
-  <row label="r7" groups="g1"><strong>Substack or email newsletters</strong><br />Newsletters delivered by email</row>
-  <row label="r8" groups="g1"><strong>Online news sites and blogs</strong><br />Websites, news sites, or blogs</row>
-  <row label="r9" groups="g1"><strong>Rumble or alternative video platforms</strong><br />Rumble, Odysee, Brighteon, or similar</row>
-  <row label="r10" groups="g1"><strong>Telegram or Signal channels</strong><br />Channels or groups on Telegram or Signal Cable or broadcast TV</row>
-  <row label="r11" groups="g1"><strong>Cable news or broadcast TV programs</strong></row>
-  <row label="r12" groups="g1"><strong>Radio or talk radio</strong><br />AM/FM radio, satellite radio, or talk radio shows</row>
-  <row label="r99" exclusive="1" groups="g2" randomize="0"><span class="NoneOfThese">None of these</span></row>
-  <group label="g1" builder:axis="row" builder:default="1" where="none">no group</group>
-  <group label="g2" builder:axis="row">&amp;nbsp;&amp;nbsp;</group>
-</checkbox>
-
-<suspend/>
-
-<style mode="after" name="respview.client.css" with="HHIX101"><![CDATA[
-<style>
-
-label:has(.NoneOfThese) {
-  border: none !important;        /* or border-color: transparent !important; */
-  box-shadow: none !important;    /* optional: clear any shadows that look like borders */
-}
-
-fieldset.atm1d .answers>div input[type=checkbox]:checked~div>label:has(.NoneOfThese){
-    border: none !important;
-    background-color: unset  !important;
-    border-color: unset !important;
-    color: unset !important;
-}
-
-
-fieldset.atm1d .answers>div input[type=checkbox]:checked~div>label:has(.NoneOfThese) .NoneOfThese {
-	border-color: #6B7F4E;
-    background: #6B7F4E;
-    color: #fff;
-	
-}
-
-
-    </style>
-]]></style>
-<checkbox 
-  label="HHIX101"
-  atleast="1"
-  atm1d:showInput="0"
-  atm1d:viewMode="tiled"
-  fir="off"
-  ss:listDisplay="1"
-  uses="atm1d.11">
-  <title>Which of the following <u>topics</u> do you follow for health or political information? Tap on all that apply.</title>
-  <comment>Think about the sources, podcasts, newsletters, or social accounts you follow regularly.</comment>
-  <row label="r1" groups="g1">Political news and<br /> commentary</row>
-  <row label="r2" groups="g1">Health policy<br /> (Insurance, drug prices, Medical reform)</row>
-  <row label="r3" groups="g1">Medicare and senior<br /> health issues</row>
-  <row label="r4" groups="g1">Natural and<br /> alternative health</row>
-  <row label="r5" groups="g1">Nutrition and diet</row>
-  <row label="r6" groups="g1">Supplements and<br /> vitamins</row>
-  <row label="r7" groups="g1">Vaccines and<br /> immunization</row>
-  <row label="r8" groups="g1">Fitness and physical<br /> performance</row>
-  <row label="r9" groups="g1">Longevity and anti<br />-aging</row>
-  <row label="r10" groups="g1">Science and medical<br /> research</row>
-  <row label="r11" groups="g1">Faith and values</row>
-  <row label="r12" groups="g1">Worker and<br /> economic issues</row>
-  <row label="r13" groups="g1">Health technology<br /> and innovation</row>
-  <row label="r14" groups="g1">Environmental and<br /> climate health</row>
-  <row label="r99" exclusive="1" groups="g2" randomize="0"><span class="NoneOfThese">None of these</span></row>
-  <group label="g1" builder:axis="row" builder:default="1" where="none">no group</group>
-  <group label="g2" builder:axis="row">&amp;nbsp;&amp;nbsp;</group>
-</checkbox>
+if 1 &lt;= seg1_idx &lt;= 16:
+    SEG1_LABEL.val = seg_names[seg1_idx - 1]
+if 1 &lt;= seg2_idx &lt;= 16:
+    SEG2_LABEL.val = seg_names[seg2_idx - 1]
+SEG1_PCT.val = "%.1f" % seg1_pct
+SEG2_PCT.val = "%.1f" % seg2_pct
+</exec>
 
 <suspend/>
 
-<style mode="after" name="respview.client.css" with="HHIX102"><![CDATA[
-<style>
-
-[data-label="c1"] {
-  background-color: #D0D0D0 !important;
-}
-
-[data-label="c2"] {
-  background-color: #E5E5E5 !important;
-}
-
-[data-label="c3"] {
-  background-color: #F2F2ED !important;
-}
-
-[data-label="c4"] {
-  background-color: #DBEBC7 !important;
-}
-
-[data-label="c5"] {
-  background-color: #C6E2A3 !important;
-}
-
-[data-label="c6"] {
-  background-color: #2E7D32 !important;
-}
-
-    </style>
-]]></style>
-<radio 
-  label="HHIX102"
-  cardrating:btnlayout="tiled"
-  cardrating:progress="0"
-  fir="off"
-  grouping="rows"
-  uses="cardrating.1">
-  <title>When was the last time you used this source for news and information on this topic?</title>
-  <comment>if you’ve never heard of it before, don’t worry – you’re definitely not alone. The next source slides in as soon as you answer. No time to waste - keep swiping!</comment>
-  <col label="c1">Never<br /> heard of it</col>
-  <col label="c2">Never<br /> used it</col>
-  <col label="c3">Over a<br /> year ago</col>
-  <col label="c4">Past<br /> year</col>
-  <col label="c5">Past<br /> month</col>
-  <col label="c6">Past<br /> week</col>
-  <row label="r1">CHOP Vaccine Education Center</row>
-  <row label="r2">Functional Medicine for Life</row>
-</radio>
-
-<suspend/>
-
-<style name="respview.client.js" with="HHIX103,HHIX103x99" wrap="ready"><![CDATA[
-//jQuery(document).on("change", "input[type='checkbox']", function () {
-
- setInterval(function () {
- 
- if($ ("div[class*='sq-cardrating-widget']").attr("data-atend") == "true")
-              $ ("#btn_continue").click();
- 
-  const isChecked = jQuery("input[type='checkbox']").is(":checked");
-
-  if (isChecked) {
-    console.log("Checked");
-    // <li> doesn't support the boolean 'disabled' property.
-    // Use a data flag + CSS pointer blocking.
-    jQuery("li.sq-cardrating-button.sq-cardrating-relative.ui-droppable")
-      .attr("data-disabled", "true")
-      .css({ pointerEvents: "none", opacity: 0.5 });
-  } else {
-    console.log("Not Checked");
-    jQuery("li.sq-cardrating-button.sq-cardrating-relative.ui-droppable")
-      .attr("data-disabled", "false")
-      .css({ pointerEvents: "", opacity: 1 });
-  }
-}, 100);
-]]></style>
-<radio 
-  label="HHIX103"
-  cardrating:btnlayout="tiled"
-  cardrating:progress="0"
-  fir="off"
-  grouping="rows"
-  keepWith="HHIX103x99"
-  optional="1"
-  uses="cardrating.1">
-  <title>Which publication or site should we have asked about?</title>
-  <comment>&amp;nbsp;&amp;nbsp;</comment>
-  <col label="c1">Never heard<br /> of it</col>
-  <col label="c2">Never used<br /> it</col>
-  <col label="c3">Over a year<br /> ago</col>
-  <col label="c4">Past year</col>
-  <col label="c5">Past month</col>
-  <col label="c6">Past week</col>
-  <row label="r1">Nourishing Traditions (Sally Fallon)</row>
-  <row label="r2">&amp;gt;&amp;gt;</row>
-</radio>
-
-<checkbox 
-  label="HHIX103x99"
-  keepWith="HHIX103">
-  <title>New Multi-Select Question</title>
-  <row label="r1" cond="1==2">None</row>
-  <row label="r99" exclusive="1"><span class="NoneOfThese">Not Sure</span></row>
-</checkbox>
-
-<suspend/>
-
-<style mode="after" name="respview.client.css" with="HHIX104"><![CDATA[
-<style>
-
-[for="ans19320.0.30"] {
-  border: unset !important;
-}
-
-
-/* applied when checkbox is checked */
-label[for="ans19320.0.30"].is-checked {
-  border-color: #6B7F4E !important;
-  background: #6B7F4E !important;
-  color: #fff !important;
-}
-
-
-label:has(.NoneOfThese) {
-  border: none !important;        /* or border-color: transparent !important; */
-  box-shadow: none !important;    /* optional: clear any shadows that look like borders */
-}
-
-fieldset.atm1d .answers>div input[type=checkbox]:checked~div>label:has(.NoneOfThese){
-    border: none !important;
-    background-color: unset  !important;
-    border-color: unset !important;
-    color: unset !important;
-}
-
-
-fieldset.atm1d .answers>div input[type=checkbox]:checked~div>label:has(.NoneOfThese) .NoneOfThese {
-	border-color: #6B7F4E;
-    background: #6B7F4E;
-    color: #fff;
-	
-}
-
-    </style>
-]]></style>
-<checkbox 
-  label="HHIX104"
-  atleast="1"
-  atm1d:showInput="0"
-  atm1d:viewMode="tiled"
-  fir="off"
-  ss:listDisplay="1"
-  uses="atm1d.11">
-  <title>Which of the following voices or creators do you follow on this topic?</title>
-  <comment>Scan the list and tap on any that you know and follow, no matter how often</comment>
-  <row label="r1" groups="g1">Andy Slavitt</row>
-  <row label="r2" groups="g1">Farzad Mostashari</row>
-  <row label="r3" groups="g1">Zeke Emanuel</row>
-  <row label="r4" groups="g1">Dave deBronkart (ePatient)</row>
-  <row label="r5" groups="g1">AARP</row>
-  <row label="r6" groups="g1">Andy Slavitt</row>
-  <row label="r7" groups="g1">Andy Slavitt</row>
-  <row label="r8" groups="g1">Andy Slavitt</row>
-  <row label="r9" groups="g1">Andy Slavitt</row>
-  <row label="r10" groups="g1">Andy Slavitt</row>
-  <row label="r11" groups="g1">Andy Slavitt</row>
-  <row label="r12" groups="g1">Andy Slavitt</row>
-  <row label="r13" groups="g1">Andy Slavitt</row>
-  <row label="r14" groups="g1">Andy Slavitt</row>
-  <row label="r15" groups="g1">Andy Slavitt</row>
-  <row label="r16" groups="g1">Andy Slavitt</row>
-  <row label="r17" groups="g1">Andy Slavitt</row>
-  <row label="r18" groups="g1">Andy Slavitt</row>
-  <row label="r19" groups="g1">Andy Slavitt</row>
-  <row label="r20" groups="g1">Andy Slavitt</row>
-  <row label="r21" groups="g1">Andy Slavitt</row>
-  <row label="r22" groups="g1">Andy Slavitt</row>
-  <row label="r23" groups="g1">Andy Slavitt</row>
-  <row label="r24" groups="g1">Andy Slavitt</row>
-  <row label="r25" groups="g1">Andy Slavitt</row>
-  <row label="r26" groups="g1">Andy Slavitt</row>
-  <row label="r27" groups="g1">Andy Slavitt</row>
-  <row label="r28" groups="g1">Andy Slavitt</row>
-  <row label="r29" groups="g1">Andy Slavitt</row>
-  <row label="r30" groups="g1">Andy Slavitt</row>
-  <row label="r31" exclusive="1" groups="g2" randomize="0"><span class="NoneOfThese">None of these</span></row>
-  <group label="g1" builder:axis="row" builder:default="1" where="none">no group</group>
-  <group label="g2" builder:axis="row">&amp;nbsp;&amp;nbsp;</group>
-</checkbox>
-
-<suspend/>
-
-<textarea 
-  label="HHIX105"
-  height="2"
-  optional="0"
-  width="50">
-  <title>Which voices or creators did we forget to include?</title>
-</textarea>
-
-<suspend/>
 </survey>
