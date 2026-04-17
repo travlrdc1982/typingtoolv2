@@ -2182,9 +2182,8 @@ p.MDcount = str(QMD1_md_loop_expanded.order.index([loopvar: task]-1)+1)
     .md-row { display: flex; align-items: center; padding: 12px 4px;
         border-bottom: 1px solid #EDE9E3; gap: 10px; }
     .md-row:last-child { border-bottom: none; }
-    .md-row-text { flex: 1; min-width: 33%; font-family: Fraunces,Georgia,serif; font-size: 16px;
-        color: #333; line-height: 1.5; text-align: center; padding: 0 12px;
-        overflow-wrap: break-word; word-wrap: break-word; }
+    .md-row-text { flex: 1; font-family: Fraunces,Georgia,serif; font-size: 16px;
+        color: #333; line-height: 1.5; text-align: center; padding: 0 8px; }
     .md-row:hover { background: rgba(0,0,0,.03); border-radius: 8px; }
     .md-row.md-has-best { background: rgba(107,127,78,.08); border-radius: 8px; }
     .md-row.md-has-worst { background: rgba(198,40,40,.06); border-radius: 8px; }
@@ -2783,9 +2782,8 @@ p.MDcount = str(QMD3_md_loop_expanded.order.index([loopvar: task]-1)+1)
     .md-row { display: flex; align-items: center; padding: 12px 4px;
         border-bottom: 1px solid #EDE9E3; gap: 10px; }
     .md-row:last-child { border-bottom: none; }
-    .md-row-text { flex: 1; min-width: 33%; font-family: Fraunces,Georgia,serif; font-size: 16px;
-        color: #333; line-height: 1.5; text-align: center; padding: 0 12px;
-        overflow-wrap: break-word; word-wrap: break-word; }
+    .md-row-text { flex: 1; font-family: Fraunces,Georgia,serif; font-size: 16px;
+        color: #333; line-height: 1.5; text-align: center; padding: 0 8px; }
     .md-row:hover { background: rgba(0,0,0,.03); border-radius: 8px; }
     .md-row.md-has-best { background: rgba(107,127,78,.08); border-radius: 8px; }
     .md-row.md-has-worst { background: rgba(198,40,40,.06); border-radius: 8px; }
