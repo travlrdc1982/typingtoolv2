@@ -1271,60 +1271,49 @@ var defined = function(s,c){ return (c||document).querySelector(s); };
 <style mode="after" name="respview.client.css"><![CDATA[
 <style>
 /* ================================================================
-   PRISM UNIVERSAL STYLE GUIDE — Design Tokens + Question Types
+   PRISM UNIVERSAL STYLE GUIDE (global scope - intentional)
+   Applies to all survey pages. Use with= on per-question overrides. (global scope - intentional)
+   Applies to all survey pages. Use with= on per-question overrides. — Design Tokens + Question Types
    Font stack: Fraunces (headings/statements) + Inter (UI/labels)
    ================================================================ */
 
-/* --- TOKENS --- */
-:root {
-  --prism-green: #6B7F4E;
-  --prism-red: #C62828;
-  --prism-red-mid: #EF5350;
-  --prism-red-light: #F6A6A6;
-  --prism-gray: #BDBDBD;
-  --prism-green-light: #A5D6A7;
-  --prism-green-mid: #66BB6A;
-  --prism-green-dark: #2E7D32;
-  --prism-bg: #F5F2ED;
-  --prism-card-bg: #FFFFFF;
-  --prism-border: #E0DCD6;
-  --prism-text: #333333;
-  --prism-text-secondary: #888888;
-  --prism-radius: 10px;
-  --prism-btn-radius: 24px;
-}
+/* --- TOKENS (hard-coded per Rule 18.3 - no var()) ---
+   green: #6B7F4E | red: #C62828 | gray: #BDBDBD
+   border: #E0DCD6 | text: #333333 | text-secondary: #888888
+   card-bg: #FFFFFF | survey-bg: #F5F2ED
+   --- */
 
 /* --- GLOBAL TYPOGRAPHY --- */
 h1.question-text, .ParaText, .question-text {
   font-family: Fraunces, Georgia, serif !important;
   font-size: 19px !important;
   font-weight: 700 !important;
-  color: var(--prism-text) !important;
+  color: #333333 !important;
   line-height: 1.42 !important;
 }
 .comment, .instruction-text {
   font-family: Inter, sans-serif !important;
   font-size: 13px !important;
-  color: var(--prism-text-secondary) !important;
+  color: #888888 !important;
   line-height: 1.5 !important;
 }
 
 /* --- CARD CONTAINER --- */
 form#primary, div.exit-message {
-  border: 1px solid var(--prism-border);
-  background-color: var(--prism-card-bg);
+  border: 1px solid #E0DCD6;
+  background-color: #FFFFFF;
   padding: 22px 24px 20px;
   margin-bottom: 20px;
-  border-radius: var(--prism-radius);
+  border-radius: 10px;
   max-width: 640px;
 }
 
 /* --- CONTINUE BUTTON --- */
 #btn_continue, input.button[type="submit"] {
-  background: var(--prism-green) !important;
+  background: #6B7F4E !important;
   color: #fff !important;
   border: none !important;
-  border-radius: var(--prism-btn-radius) !important;
+  border-radius: 24px !important;
   padding: 14px 36px !important;
   font-family: Inter, sans-serif !important;
   font-size: 14px !important;
@@ -1347,11 +1336,10 @@ form#primary, div.exit-message {
 .answers.answers-list label {
   font-family: Fraunces, Georgia, serif;
   font-size: 15px;
-  color: var(--prism-text);
+  color: #333333;
 }
 .answers.answers-list input[type="radio"] {
   width: 20px; height: 20px;
-  accent-color: var(--prism-green);
 }
 
 /* ================================================================
@@ -1361,7 +1349,7 @@ form#primary, div.exit-message {
 .fir-select2-dropdown, select.input.dropdown {
   font-family: Fraunces, Georgia, serif !important;
   font-size: 15px !important;
-  border: 1px solid var(--prism-border) !important;
+  border: 1px solid #E0DCD6 !important;
   border-radius: 6px !important;
   padding: 8px 12px !important;
 }
@@ -1374,22 +1362,22 @@ fieldset.atm1d_tiled .answers > div label {
   font-family: Inter, sans-serif !important;
   font-size: 13px !important;
   font-weight: 600 !important;
-  border: 1px solid var(--prism-border) !important;
+  border: 1px solid #E0DCD6 !important;
   border-radius: 8px !important;
   padding: 12px 16px !important;
   text-align: center !important;
   transition: all .2s ease !important;
   cursor: pointer !important;
-  background: var(--prism-card-bg) !important;
+  background: #FFFFFF !important;
 }
 fieldset.atm1d_tiled .answers > div input[type="radio"]:checked ~ div > label,
 fieldset.atm1d_tiled .answers > div input[type="checkbox"]:checked ~ div > label {
-  background: var(--prism-green) !important;
+  background: #6B7F4E !important;
   color: #fff !important;
-  border-color: var(--prism-green) !important;
+  border-color: #6B7F4E !important;
 }
 fieldset.atm1d_tiled .answers > div label:hover {
-  border-color: var(--prism-green) !important;
+  border-color: #6B7F4E !important;
   box-shadow: 0 2px 8px rgba(107,127,78,.2) !important;
 }
 
@@ -1407,7 +1395,8 @@ fieldset.atm1d_tiled .answers > div label:hover {
 }
 .fir-icon svg:hover { transform: scale(1.08); }
 
-/* 7-point gradient: red → gray → green */
+/* 7-point gradient: red -> gray -> green
+   nth-child(2)=c1 assumes row legend is td:first-child (standard Decipher grid) */
 .likert-gradient td:nth-child(2) .fir-icon.selected .fir-selected { fill: #C62828 !important; }
 .likert-gradient td:nth-child(3) .fir-icon.selected .fir-selected { fill: #EF5350 !important; }
 .likert-gradient td:nth-child(4) .fir-icon.selected .fir-selected { fill: #F6A6A6 !important; }
@@ -1434,7 +1423,7 @@ fieldset.atm1d_tiled .answers > div label:hover {
   min-width: 33% !important;
   font-family: Fraunces, Georgia, serif !important;
   font-size: 14px !important;
-  color: var(--prism-text) !important;
+  color: #333333 !important;
   line-height: 1.45 !important;
   padding-right: 12px !important;
 }
@@ -1461,11 +1450,11 @@ fieldset.atm1d_tiled .answers > div label:hover {
    ================================================================ */
 .differential-row {
   display: flex; align-items: center; gap: 12px;
-  padding: 16px 0; border-bottom: 1px solid var(--prism-border);
+  padding: 16px 0; border-bottom: 1px solid #E0DCD6;
 }
 .differential-statement {
   flex: 1; font-family: Fraunces, Georgia, serif;
-  font-size: 14px; line-height: 1.5; color: var(--prism-text);
+  font-size: 14px; line-height: 1.5; color: #333333;
 }
 .differential-statement.left { text-align: right; }
 .differential-statement.right { text-align: left; }
@@ -1475,7 +1464,6 @@ fieldset.atm1d_tiled .answers > div label:hover {
    ================================================================ */
 .answers.answers-list input[type="checkbox"] {
   width: 20px; height: 20px;
-  accent-color: var(--prism-green);
 }
 .answers.answers-list input[type="checkbox"]:checked + label,
 .answers.answers-list input[type="checkbox"]:checked ~ div > label {
@@ -1485,7 +1473,7 @@ span.NoneOfThese {
   font-family: Inter, sans-serif !important;
   font-size: 12px !important;
   font-weight: 600 !important;
-  color: var(--prism-text-secondary) !important;
+  color: #888888 !important;
   text-transform: uppercase !important;
   letter-spacing: .06em !important;
 }
@@ -1496,12 +1484,12 @@ span.NoneOfThese {
 input.input[type="text"], textarea.input {
   font-family: Inter, sans-serif !important;
   font-size: 15px !important;
-  border: 1px solid var(--prism-border) !important;
+  border: 1px solid #E0DCD6 !important;
   border-radius: 6px !important;
   padding: 10px 14px !important;
 }
 input.input[type="text"]:focus, textarea.input:focus {
-  border-color: var(--prism-green) !important;
+  border-color: #6B7F4E !important;
   outline: none !important;
   box-shadow: 0 0 0 3px rgba(107,127,78,.15) !important;
 }
@@ -1513,9 +1501,9 @@ input.input[type="text"]:focus, textarea.input:focus {
   font-family: Inter, sans-serif !important;
   font-size: 14px !important;
   padding: 12px 16px !important;
-  border: 1px solid var(--prism-border) !important;
+  border: 1px solid #E0DCD6 !important;
   border-radius: 8px !important;
-  background: var(--prism-card-bg) !important;
+  background: #FFFFFF !important;
   margin-bottom: 6px !important;
   cursor: grab !important;
 }
@@ -1523,7 +1511,7 @@ input.input[type="text"]:focus, textarea.input:focus {
 .rank-number {
   display: inline-flex; align-items: center; justify-content: center;
   width: 28px; height: 28px; border-radius: 50%;
-  background: var(--prism-green); color: #fff;
+  background: #6B7F4E; color: #fff;
   font-weight: 700; font-size: 13px; margin-right: 12px;
 }
 
@@ -3443,34 +3431,35 @@ SEG2_PCT.val = "%.1f" % seg2_pct
   optional="1">
   <title>Which of these best describes your current health insurance?</title>
   <comment>Select one</comment>
-  <row label="r1">Employer-sponsored</row>
-  <row label="r2">ACA / Marketplace plan</row>
-  <row label="r3">Medicare</row>
-  <row label="r4">Medicaid</row>
-  <row label="r5">Uninsured</row>
-  <row label="r6" open="1" openSize="25" randomize="0">Other</row>
-  <row label="r99" randomize="0">Not sure</row>
+  <row label="r1" value="1">Employer-sponsored</row>
+  <row label="r2" value="2">ACA / Marketplace plan</row>
+  <row label="r3" value="3">Medicare</row>
+  <row label="r4" value="4">Medicaid</row>
+  <row label="r5" value="5">Uninsured</row>
+  <row label="r6" value="6" open="1" openSize="25" randomize="0">Other</row>
+  <row label="r99" value="99" randomize="0">Not sure</row>
 </radio>
 
 <suspend/>
 
-<note>--- 2.8 STYLE.DROPDOWN ---</note>
-<select
+<note>--- 2.8 STYLE.DROPDOWN (radio rendered as dropdown via ss:listDisplay) ---</note>
+<radio
   label="TEST_dropdown"
   cond="1==2"
-  optional="1">
+  optional="1"
+  ss:listDisplay="1">
   <title>In which state do you currently reside?</title>
   <comment>Select from the list</comment>
-  <choice label="ch1">Alabama</choice>
-  <choice label="ch2">Alaska</choice>
-  <choice label="ch3">Arizona</choice>
-  <choice label="ch4">Arkansas</choice>
-  <choice label="ch5">California</choice>
-  <choice label="ch6">Colorado</choice>
-  <choice label="ch7">Connecticut</choice>
-  <choice label="ch8">Delaware</choice>
-  <choice label="ch99">Prefer not to answer</choice>
-</select>
+  <row label="r1" value="1">Alabama</row>
+  <row label="r2" value="2">Alaska</row>
+  <row label="r3" value="3">Arizona</row>
+  <row label="r4" value="4">Arkansas</row>
+  <row label="r5" value="5">California</row>
+  <row label="r6" value="6">Colorado</row>
+  <row label="r7" value="7">Connecticut</row>
+  <row label="r8" value="8">Delaware</row>
+  <row label="r99" value="99" randomize="0">Prefer not to answer</row>
+</radio>
 
 <suspend/>
 
@@ -3487,11 +3476,11 @@ SEG2_PCT.val = "%.1f" % seg2_pct
   uses="atm1d.11">
   <title>How effective do you think current U.S. health policy is?</title>
   <comment>Select one</comment>
-  <row label="r1">Very Ineffective</row>
-  <row label="r2">Somewhat Ineffective</row>
-  <row label="r3">Neither</row>
-  <row label="r4">Somewhat Effective</row>
-  <row label="r5">Very Effective</row>
+  <row label="r1" value="1">Very Ineffective</row>
+  <row label="r2" value="2">Somewhat Ineffective</row>
+  <row label="r3" value="3">Neither</row>
+  <row label="r4" value="4">Somewhat Effective</row>
+  <row label="r5" value="5">Very Effective</row>
 </radio>
 
 <suspend/>
@@ -3508,12 +3497,12 @@ SEG2_PCT.val = "%.1f" % seg2_pct
   optional="1"
   uses="atm1d.11">
   <title>How many people live in your household including yourself?</title>
-  <row label="r1">1</row>
-  <row label="r2">2</row>
-  <row label="r3">3</row>
-  <row label="r4">4</row>
-  <row label="r5">5</row>
-  <row label="r6">6 or more</row>
+  <row label="r1" value="1">1</row>
+  <row label="r2" value="2">2</row>
+  <row label="r3" value="3">3</row>
+  <row label="r4" value="4">4</row>
+  <row label="r5" value="5">5</row>
+  <row label="r6" value="6">6 or more</row>
 </radio>
 
 <suspend/>
@@ -3534,7 +3523,7 @@ SEG2_PCT.val = "%.1f" % seg2_pct
   <col label="c5">&amp;nbsp;</col>
   <col label="c6">&amp;nbsp;</col>
   <col label="c7"><span style="color:#2E7D32;">Very<br />Safe</span></col>
-  <row label="r1">Childhood vaccines</row>
+  <row label="r1" value="1">Childhood vaccines</row>
 </radio>
 
 <suspend/>
@@ -3556,9 +3545,9 @@ SEG2_PCT.val = "%.1f" % seg2_pct
   <col label="c5">Somewhat<br />Agree</col>
   <col label="c6">Agree</col>
   <col label="c7"><span style="color:#2E7D32;">Strongly<br />Agree</span></col>
-  <row label="r1">Access to affordable healthcare is a basic human right.</row>
-  <row label="r2">The government should regulate drug prices more strictly.</row>
-  <row label="r3">Individual responsibility matters more than government programs for health.</row>
+  <row label="r1" value="1">Access to affordable healthcare is a basic human right.</row>
+  <row label="r2" value="2">The government should regulate drug prices more strictly.</row>
+  <row label="r3" value="3">Individual responsibility matters more than government programs for health.</row>
 </radio>
 
 <suspend/>
@@ -3581,9 +3570,9 @@ SEG2_PCT.val = "%.1f" % seg2_pct
   <col label="c5">Somewhat<br />Agree</col>
   <col label="c6">Agree</col>
   <col label="c7"><span style="color:#2E7D32;">Strongly<br />AGREE</span></col>
-  <row label="r1">Vaccines should be mandatory for school-age children.</row>
-  <row label="r2">Natural remedies are undervalued by modern medicine.</row>
-  <row label="r3">Pharmaceutical companies put profits above patient welfare.</row>
+  <row label="r1" value="1">Vaccines should be mandatory for school-age children.</row>
+  <row label="r2" value="2">Natural remedies are undervalued by modern medicine.</row>
+  <row label="r3" value="3">Pharmaceutical companies put profits above patient welfare.</row>
 </radio>
 
 <suspend/>
@@ -3604,7 +3593,7 @@ SEG2_PCT.val = "%.1f" % seg2_pct
   <col label="c5">&amp;nbsp;</col>
   <col label="c6">&amp;nbsp;</col>
   <col label="c7">Make it easier to sue vaccine manufacturers directly in civil court</col>
-  <row label="r1">Vaccine liability</row>
+  <row label="r1" value="1">Vaccine liability</row>
 </radio>
 
 <suspend/>
@@ -3617,11 +3606,11 @@ SEG2_PCT.val = "%.1f" % seg2_pct
   shuffle="rows">
   <title>In the past 12 months, which of the following have you done?</title>
   <comment>Select all that apply</comment>
-  <row label="r1" groups="g1">Signed a petition related to health policy</row>
-  <row label="r2" groups="g1">Attended a town hall or public meeting</row>
-  <row label="r3" groups="g1">Donated to a health-related cause</row>
-  <row label="r4" groups="g1">Contacted an elected official about health</row>
-  <row label="r5" groups="g1">Shared a health policy article on social media</row>
+  <row label="r1" value="1" groups="g1">Signed a petition related to health policy</row>
+  <row label="r2" value="2" groups="g1">Attended a town hall or public meeting</row>
+  <row label="r3" value="3" groups="g1">Donated to a health-related cause</row>
+  <row label="r4" value="4" groups="g1">Contacted an elected official about health</row>
+  <row label="r5" value="5" groups="g1">Shared a health policy article on social media</row>
   <row label="r99" exclusive="1" groups="g2" randomize="0"><span class="NoneOfThese">None of these</span></row>
   <group label="g1" builder:axis="row" builder:default="1" where="none">actions</group>
   <group label="g2" builder:axis="row">&amp;nbsp;&amp;nbsp;</group>
@@ -3642,13 +3631,13 @@ SEG2_PCT.val = "%.1f" % seg2_pct
   uses="atm1d.11">
   <title>Which of these health topics interest you most?</title>
   <comment>Select all that apply</comment>
-  <row label="r1">Vaccines</row>
-  <row label="r2">Mental Health</row>
-  <row label="r3">Nutrition</row>
-  <row label="r4">Drug Pricing</row>
-  <row label="r5">Medicare</row>
-  <row label="r6">Rural Health</row>
-  <row label="r99" exclusive="1" randomize="0"><span class="NoneOfThese">None of these</span></row>
+  <row label="r1" value="1">Vaccines</row>
+  <row label="r2" value="2">Mental Health</row>
+  <row label="r3" value="3">Nutrition</row>
+  <row label="r4" value="4">Drug Pricing</row>
+  <row label="r5" value="5">Medicare</row>
+  <row label="r6" value="6">Rural Health</row>
+  <row label="r99" value="99" exclusive="1" randomize="0"><span class="NoneOfThese">None of these</span></row>
 </checkbox>
 
 <suspend/>
@@ -3679,20 +3668,21 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 
 <suspend/>
 
-<note>--- 2.7 STYLE.RANKSORT ---</note>
-<radio
+<note>--- 2.7 STYLE.RANKSORT (number entry - native ranking uses may vary by instance) ---</note>
+<number
   label="TEST_ranksort"
   cond="1==2"
+  size="1"
   optional="1"
-  uses="ranking.1">
+  verify="range(1,5)">
   <title>Rank these industries from most trusted (1) to least trusted (5)</title>
-  <comment>Drag to reorder</comment>
-  <row label="r1">Biopharmaceuticals</row>
-  <row label="r2">Oil &amp; Gas</row>
-  <row label="r3">AI / Technology</row>
-  <row label="r4">Automotive Manufacturing</row>
-  <row label="r5">Aerospace &amp; Defense</row>
-</radio>
+  <comment>Enter a number 1-5 for each (no ties)</comment>
+  <row label="r1" value="1">Biopharmaceuticals</row>
+  <row label="r2" value="2">Oil and Gas</row>
+  <row label="r3" value="3">AI / Technology</row>
+  <row label="r4" value="4">Automotive Manufacturing</row>
+  <row label="r5" value="5">Aerospace and Defense</row>
+</number>
 
 <suspend/>
 </survey>
