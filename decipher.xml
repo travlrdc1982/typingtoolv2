@@ -1268,6 +1268,91 @@ var defined = function(s,c){ return (c||document).querySelector(s); };
     }
   });
 ]]></style>
+<style name="respview.client.css" with="qvector4"><![CDATA[
+<style>
+
+.fir-icon {
+  width: unset;
+  height: unset;
+}
+
+.grid.grid-table-mode.setWidth {
+  max-width: 600px;
+}
+
+.grid-table-mode .nonempty {
+  border: unset;
+}
+
+.col-legend {
+  background-color: unset;
+}
+
+input[type="radio"] + .fir-icon svg {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,.12), inset 0 1px 2px rgba(255,255,255,.6);
+  cursor: pointer;
+  transition: all .2s ease;
+  outline: none;
+}
+
+
+.fir-icon svg:hover {
+  transform: scale(1.08);
+}
+
+  #question_qvector4 .fir-icon.selected .rounded .fir-selected,
+  #question_qvector4 .fir-icon.selected .square  .fir-selected {
+    fill: inherit !important;
+  }
+
+  #question_qvector4 .fir-selected {
+    transition: fill .15s ease;
+  }
+
+  #question_qvector4 td[headers~="qvector4_c1"] .fir-icon.selected .fir-selected,
+  #question_qvector4 td[headers~="qvector4_c1"]:hover               .fir-selected {
+    fill: #C62828 !important;
+  }
+
+  #question_qvector4 td[headers~="qvector4_c2"] .fir-icon.selected .fir-selected,
+  #question_qvector4 td[headers~="qvector4_c2"]:hover               .fir-selected {
+    fill: #EF5350 !important;
+  }
+
+  #question_qvector4 td[headers~="qvector4_c3"] .fir-icon.selected .fir-selected,
+  #question_qvector4 td[headers~="qvector4_c3"]:hover               .fir-selected {
+    fill: #F6A6A6 !important;
+  }
+
+  #question_qvector4 td[headers~="qvector4_c4"] .fir-icon.selected .fir-selected,
+  #question_qvector4 td[headers~="qvector4_c4"]:hover               .fir-selected {
+    fill: #BDBDBD !important;
+  }
+
+  #question_qvector4 td[headers~="qvector4_c5"] .fir-icon.selected .fir-selected,
+  #question_qvector4 td[headers~="qvector4_c5"]:hover               .fir-selected {
+    fill: #A5D6A7 !important;
+  }
+
+  #question_qvector4 td[headers~="qvector4_c6"] .fir-icon.selected .fir-selected,
+  #question_qvector4 td[headers~="qvector4_c6"]:hover               .fir-selected {
+    fill: #66BB6A !important;
+  }
+
+  #question_qvector4 td[headers~="qvector4_c7"] .fir-icon.selected .fir-selected,
+  #question_qvector4 td[headers~="qvector4_c7"]:hover               .fir-selected {
+    fill: #2E7D32 !important;
+  }
+
+</style>
+]]></style>
 <html label="sc_page_ui"><![CDATA[<style>.nextPage, .button { display: none !important; }
 
 .sc-logo-bar {
@@ -1713,17 +1798,17 @@ elif QPARTY1.r3 or QPARTY1.r4:
     else:          party = 4
 
 if QVOTE24.r1:
-    if party &gt;= 6:
+    if party &gt;= 5:
         TYPING_MODULE.val = TYPING_MODULE.r3.index
     else:
         TYPING_MODULE.val = TYPING_MODULE.r1.index
 elif QVOTE24.r2:
-    if party &lt;= 2:
+    if party &lt;= 3:
         TYPING_MODULE.val = TYPING_MODULE.r3.index
     else:
         TYPING_MODULE.val = TYPING_MODULE.r2.index
 elif QVOTE24.r3:
-    if party &lt;= 3:
+    if party &lt;= 2:
         TYPING_MODULE.val = TYPING_MODULE.r1.index
     elif party &gt;= 5:
         TYPING_MODULE.val = TYPING_MODULE.r2.index
@@ -2080,8 +2165,9 @@ QMD1_Timer.val = (timeSpent() - p.startTime) / 60.0
 
   <suspend/>
 
-  <radio 
+  <radio
    label="qvector4"
+   noanswer="0"
    surveyDisplay="desktop">
     <title>Tell us how much you agree or disagree with these statements</title>
     <comment>Tap where you fall on each statement...</comment>
