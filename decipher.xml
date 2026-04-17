@@ -1268,6 +1268,267 @@ var defined = function(s,c){ return (c||document).querySelector(s); };
     }
   });
 ]]></style>
+<style mode="after" name="respview.client.css"><![CDATA[
+<style>
+/* ================================================================
+   PRISM UNIVERSAL STYLE GUIDE — Design Tokens + Question Types
+   Font stack: Fraunces (headings/statements) + Inter (UI/labels)
+   ================================================================ */
+
+/* --- TOKENS --- */
+:root {
+  --prism-green: #6B7F4E;
+  --prism-red: #C62828;
+  --prism-red-mid: #EF5350;
+  --prism-red-light: #F6A6A6;
+  --prism-gray: #BDBDBD;
+  --prism-green-light: #A5D6A7;
+  --prism-green-mid: #66BB6A;
+  --prism-green-dark: #2E7D32;
+  --prism-bg: #F5F2ED;
+  --prism-card-bg: #FFFFFF;
+  --prism-border: #E0DCD6;
+  --prism-text: #333333;
+  --prism-text-secondary: #888888;
+  --prism-radius: 10px;
+  --prism-btn-radius: 24px;
+}
+
+/* --- GLOBAL TYPOGRAPHY --- */
+h1.question-text, .ParaText, .question-text {
+  font-family: Fraunces, Georgia, serif !important;
+  font-size: 19px !important;
+  font-weight: 700 !important;
+  color: var(--prism-text) !important;
+  line-height: 1.42 !important;
+}
+.comment, .instruction-text {
+  font-family: Inter, sans-serif !important;
+  font-size: 13px !important;
+  color: var(--prism-text-secondary) !important;
+  line-height: 1.5 !important;
+}
+
+/* --- CARD CONTAINER --- */
+form#primary, div.exit-message {
+  border: 1px solid var(--prism-border);
+  background-color: var(--prism-card-bg);
+  padding: 22px 24px 20px;
+  margin-bottom: 20px;
+  border-radius: var(--prism-radius);
+  max-width: 640px;
+}
+
+/* --- CONTINUE BUTTON --- */
+#btn_continue, input.button[type="submit"] {
+  background: var(--prism-green) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: var(--prism-btn-radius) !important;
+  padding: 14px 36px !important;
+  font-family: Inter, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+}
+#btn_continue:hover, input.button[type="submit"]:hover {
+  filter: brightness(1.08);
+}
+
+/* --- NOANSWER / PNTA ROW (global hide when noanswer="0") --- */
+.noanswer-row.hidden { display: none !important; }
+
+/* ================================================================
+   2.8 STYLE.RADIO.VERTICAL — standard single-select list
+   Native Decipher: <radio> (default layout)
+   ================================================================ */
+.answers.answers-list label {
+  font-family: Fraunces, Georgia, serif;
+  font-size: 15px;
+  color: var(--prism-text);
+}
+.answers.answers-list input[type="radio"] {
+  width: 20px; height: 20px;
+  accent-color: var(--prism-green);
+}
+
+/* ================================================================
+   2.8 STYLE.DROPDOWN — native <select>
+   Native Decipher: <radio> with fir="off" or <select>
+   ================================================================ */
+.fir-select2-dropdown, select.input.dropdown {
+  font-family: Fraunces, Georgia, serif !important;
+  font-size: 15px !important;
+  border: 1px solid var(--prism-border) !important;
+  border-radius: 6px !important;
+  padding: 8px 12px !important;
+}
+
+/* ================================================================
+   2.10 STYLE.BUTTON.HORIZONTAL — row of rectangular buttons
+   Native Decipher: <radio uses="atm1d.11"> with atm1d:viewMode="tiled"
+   ================================================================ */
+fieldset.atm1d_tiled .answers > div label {
+  font-family: Inter, sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  border: 1px solid var(--prism-border) !important;
+  border-radius: 8px !important;
+  padding: 12px 16px !important;
+  text-align: center !important;
+  transition: all .2s ease !important;
+  cursor: pointer !important;
+  background: var(--prism-card-bg) !important;
+}
+fieldset.atm1d_tiled .answers > div input[type="radio"]:checked ~ div > label,
+fieldset.atm1d_tiled .answers > div input[type="checkbox"]:checked ~ div > label {
+  background: var(--prism-green) !important;
+  color: #fff !important;
+  border-color: var(--prism-green) !important;
+}
+fieldset.atm1d_tiled .answers > div label:hover {
+  border-color: var(--prism-green) !important;
+  box-shadow: 0 2px 8px rgba(107,127,78,.2) !important;
+}
+
+/* ================================================================
+   2.9 STYLE.RADIO.HORIZONTAL / STYLE.SINGLE.LIKERT
+   FIR radio scale with gradient fills
+   Native Decipher: <radio fir="on"> or question-level fir
+   ================================================================ */
+.fir-icon svg {
+  width: 44px !important; height: 44px !important; min-width: 44px !important;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,.12), inset 0 1px 2px rgba(255,255,255,.6);
+  cursor: pointer;
+  transition: all .2s ease;
+}
+.fir-icon svg:hover { transform: scale(1.08); }
+
+/* 7-point gradient: red → gray → green */
+.likert-gradient td:nth-child(2) .fir-icon.selected .fir-selected { fill: #C62828 !important; }
+.likert-gradient td:nth-child(3) .fir-icon.selected .fir-selected { fill: #EF5350 !important; }
+.likert-gradient td:nth-child(4) .fir-icon.selected .fir-selected { fill: #F6A6A6 !important; }
+.likert-gradient td:nth-child(5) .fir-icon.selected .fir-selected { fill: #BDBDBD !important; }
+.likert-gradient td:nth-child(6) .fir-icon.selected .fir-selected { fill: #A5D6A7 !important; }
+.likert-gradient td:nth-child(7) .fir-icon.selected .fir-selected { fill: #66BB6A !important; }
+.likert-gradient td:nth-child(8) .fir-icon.selected .fir-selected { fill: #2E7D32 !important; }
+
+/* hover preview gradient */
+.likert-gradient td:nth-child(2):hover .fir-selected { fill: #C62828 !important; }
+.likert-gradient td:nth-child(3):hover .fir-selected { fill: #EF5350 !important; }
+.likert-gradient td:nth-child(4):hover .fir-selected { fill: #F6A6A6 !important; }
+.likert-gradient td:nth-child(5):hover .fir-selected { fill: #BDBDBD !important; }
+.likert-gradient td:nth-child(6):hover .fir-selected { fill: #A5D6A7 !important; }
+.likert-gradient td:nth-child(7):hover .fir-selected { fill: #66BB6A !important; }
+.likert-gradient td:nth-child(8):hover .fir-selected { fill: #2E7D32 !important; }
+
+/* ================================================================
+   2.9 STYLE.MATRIX / STYLE.CARDSHUFFLE — grid/matrix questions
+   Ensure >=33% width for row labels
+   ================================================================ */
+.grid-table-mode th.row-legend,
+.grid-table-mode .row-legend-text {
+  min-width: 33% !important;
+  font-family: Fraunces, Georgia, serif !important;
+  font-size: 14px !important;
+  color: var(--prism-text) !important;
+  line-height: 1.45 !important;
+  padding-right: 12px !important;
+}
+.grid-table-mode .col-legend {
+  font-family: Inter, sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: .04em !important;
+}
+
+/* Card shuffle (cardrating) */
+.sq-cardrating-button {
+  padding: 10px !important;
+  height: auto !important;
+  min-height: 48px !important;
+  line-height: 1.3 !important;
+  font-family: Fraunces, Georgia, serif !important;
+  font-size: 14px !important;
+}
+
+/* ================================================================
+   2.6 STYLE.DIFFERENTIAL — semantic differential 7-pt scale
+   ================================================================ */
+.differential-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 16px 0; border-bottom: 1px solid var(--prism-border);
+}
+.differential-statement {
+  flex: 1; font-family: Fraunces, Georgia, serif;
+  font-size: 14px; line-height: 1.5; color: var(--prism-text);
+}
+.differential-statement.left { text-align: right; }
+.differential-statement.right { text-align: left; }
+
+/* ================================================================
+   2.12 STYLE.CHECKLIST — multi-select checkboxes
+   ================================================================ */
+.answers.answers-list input[type="checkbox"] {
+  width: 20px; height: 20px;
+  accent-color: var(--prism-green);
+}
+.answers.answers-list input[type="checkbox"]:checked + label,
+.answers.answers-list input[type="checkbox"]:checked ~ div > label {
+  font-weight: 600;
+}
+span.NoneOfThese {
+  font-family: Inter, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: var(--prism-text-secondary) !important;
+  text-transform: uppercase !important;
+  letter-spacing: .06em !important;
+}
+
+/* ================================================================
+   2.2 STYLE.OPEN.TEXT / STYLE.DIGITBOXES
+   ================================================================ */
+input.input[type="text"], textarea.input {
+  font-family: Inter, sans-serif !important;
+  font-size: 15px !important;
+  border: 1px solid var(--prism-border) !important;
+  border-radius: 6px !important;
+  padding: 10px 14px !important;
+}
+input.input[type="text"]:focus, textarea.input:focus {
+  border-color: var(--prism-green) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(107,127,78,.15) !important;
+}
+
+/* ================================================================
+   2.7 STYLE.RANKSORT — drag-and-drop ranking
+   ================================================================ */
+.ranking-item, .sortable-item {
+  font-family: Inter, sans-serif !important;
+  font-size: 14px !important;
+  padding: 12px 16px !important;
+  border: 1px solid var(--prism-border) !important;
+  border-radius: 8px !important;
+  background: var(--prism-card-bg) !important;
+  margin-bottom: 6px !important;
+  cursor: grab !important;
+}
+.ranking-item:active, .sortable-item:active { cursor: grabbing !important; }
+.rank-number {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--prism-green); color: #fff;
+  font-weight: 700; font-size: 13px; margin-right: 12px;
+}
+
+</style>
+]]></style>
 <style name="respview.client.css" with="qvector4"><![CDATA[
 <style>
 
@@ -1921,8 +2182,9 @@ p.MDcount = str(QMD1_md_loop_expanded.order.index([loopvar: task]-1)+1)
     .md-row { display: flex; align-items: center; padding: 12px 4px;
         border-bottom: 1px solid #EDE9E3; gap: 10px; }
     .md-row:last-child { border-bottom: none; }
-    .md-row-text { flex: 1; font-family: Fraunces,Georgia,serif; font-size: 16px;
-        color: #333; line-height: 1.5; text-align: center; padding: 0 8px; }
+    .md-row-text { flex: 1; min-width: 33%; font-family: Fraunces,Georgia,serif; font-size: 16px;
+        color: #333; line-height: 1.5; text-align: center; padding: 0 12px;
+        overflow-wrap: break-word; word-wrap: break-word; }
     .md-row:hover { background: rgba(0,0,0,.03); border-radius: 8px; }
     .md-row.md-has-best { background: rgba(107,127,78,.08); border-radius: 8px; }
     .md-row.md-has-worst { background: rgba(198,40,40,.06); border-radius: 8px; }
@@ -2521,8 +2783,9 @@ p.MDcount = str(QMD3_md_loop_expanded.order.index([loopvar: task]-1)+1)
     .md-row { display: flex; align-items: center; padding: 12px 4px;
         border-bottom: 1px solid #EDE9E3; gap: 10px; }
     .md-row:last-child { border-bottom: none; }
-    .md-row-text { flex: 1; font-family: Fraunces,Georgia,serif; font-size: 16px;
-        color: #333; line-height: 1.5; text-align: center; padding: 0 8px; }
+    .md-row-text { flex: 1; min-width: 33%; font-family: Fraunces,Georgia,serif; font-size: 16px;
+        color: #333; line-height: 1.5; text-align: center; padding: 0 12px;
+        overflow-wrap: break-word; word-wrap: break-word; }
     .md-row:hover { background: rgba(0,0,0,.03); border-radius: 8px; }
     .md-row.md-has-best { background: rgba(107,127,78,.08); border-radius: 8px; }
     .md-row.md-has-worst { background: rgba(198,40,40,.06); border-radius: 8px; }
@@ -3159,4 +3422,281 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 
 <suspend/>
 
+
+<note>===================== STYLE GUIDE TEST QUESTIONS =====================</note>
+<note>These test questions demonstrate each question type with PRISM styling.
+      Gate behind cond="1==2" to hide from real respondents.</note>
+
+<suspend/>
+
+<html label="test_intro" cond="1==2" where="survey">
+<div style="text-align:center;padding:24px;font-family:Inter,sans-serif;">
+  <h2 style="font-family:Fraunces,Georgia,serif;">Question Type Gallery</h2>
+  <p style="color:#888;">One test question per type. All gated — invisible to respondents.</p>
+</div>
+</html>
+
+<suspend/>
+
+<note>--- 2.8 STYLE.RADIO.VERTICAL ---</note>
+<radio
+  label="TEST_radio_vert"
+  cond="1==2"
+  optional="1">
+  <title>Which of these best describes your current health insurance?</title>
+  <comment>Select one</comment>
+  <row label="r1">Employer-sponsored</row>
+  <row label="r2">ACA / Marketplace plan</row>
+  <row label="r3">Medicare</row>
+  <row label="r4">Medicaid</row>
+  <row label="r5">Uninsured</row>
+  <row label="r6" open="1" openSize="25" randomize="0">Other</row>
+  <row label="r99" randomize="0">Not sure</row>
+</radio>
+
+<suspend/>
+
+<note>--- 2.8 STYLE.DROPDOWN ---</note>
+<radio
+  label="TEST_dropdown"
+  cond="1==2"
+  fir="off"
+  optional="1"
+  uses="select.1">
+  <title>In which state do you currently reside?</title>
+  <comment>Select from the list</comment>
+  <row label="r1">Alabama</row>
+  <row label="r2">Alaska</row>
+  <row label="r3">Arizona</row>
+  <row label="r4">Arkansas</row>
+  <row label="r5">California</row>
+  <row label="r6">Colorado</row>
+  <row label="r7">Connecticut</row>
+  <row label="r8">Delaware</row>
+  <row label="r99" randomize="0">Prefer not to answer</row>
+</radio>
+
+<suspend/>
+
+<note>--- 2.10 STYLE.BUTTON.HORIZONTAL ---</note>
+<radio
+  label="TEST_btn_horiz"
+  cond="1==2"
+  atm1d:large_maxWidth="160px"
+  atm1d:large_minWidth="120px"
+  atm1d:showInput="0"
+  atm1d:small_minWidth="100%"
+  atm1d:viewMode="tiled"
+  optional="1"
+  uses="atm1d.11">
+  <title>How effective do you think current U.S. health policy is?</title>
+  <comment>Select one</comment>
+  <row label="r1">Very Ineffective</row>
+  <row label="r2">Somewhat Ineffective</row>
+  <row label="r3">Neither</row>
+  <row label="r4">Somewhat Effective</row>
+  <row label="r5">Very Effective</row>
+</radio>
+
+<suspend/>
+
+<note>--- 2.11 STYLE.BUTTONSELECT (grid 2x3) ---</note>
+<radio
+  label="TEST_btn_select"
+  cond="1==2"
+  atm1d:large_maxWidth="200px"
+  atm1d:large_minWidth="180px"
+  atm1d:showInput="0"
+  atm1d:small_minWidth="45%"
+  atm1d:viewMode="tiled"
+  optional="1"
+  uses="atm1d.11">
+  <title>How many people live in your household including yourself?</title>
+  <row label="r1">1</row>
+  <row label="r2">2</row>
+  <row label="r3">3</row>
+  <row label="r4">4</row>
+  <row label="r5">5</row>
+  <row label="r6">6 or more</row>
+</radio>
+
+<suspend/>
+
+<note>--- 2.9 STYLE.RADIO.HORIZONTAL / LIKERT (7-pt with gradient) ---</note>
+<radio
+  label="TEST_likert"
+  cond="1==2"
+  fir="on"
+  optional="1"
+  ss:questionClassNames="likert-gradient">
+  <title>How safe do you believe childhood vaccines are?</title>
+  <comment>Tap where you fall on the scale</comment>
+  <col label="c1"><span style="color:#C62828;">Very<br />Unsafe</span></col>
+  <col label="c2">&amp;nbsp;</col>
+  <col label="c3">&amp;nbsp;</col>
+  <col label="c4"><span style="color:#737374;">Neutral/<br />Unsure</span></col>
+  <col label="c5">&amp;nbsp;</col>
+  <col label="c6">&amp;nbsp;</col>
+  <col label="c7"><span style="color:#2E7D32;">Very<br />Safe</span></col>
+  <row label="r1">Childhood vaccines</row>
+</radio>
+
+<suspend/>
+
+<note>--- 2.9 STYLE.MATRIX (grid with gradient) ---</note>
+<radio
+  label="TEST_matrix"
+  cond="1==2"
+  builderHint="{&quot;rocochoName&quot;:&quot;radiogrid&quot;}"
+  fir="on"
+  shuffle="rows"
+  ss:questionClassNames="likert-gradient">
+  <title>How much do you agree or disagree with each statement?</title>
+  <comment>Select one per row</comment>
+  <col label="c1"><span style="color:#C62828;">Strongly<br />Disagree</span></col>
+  <col label="c2">Disagree</col>
+  <col label="c3">Somewhat<br />Disagree</col>
+  <col label="c4">Neither/<br />Neutral</col>
+  <col label="c5">Somewhat<br />Agree</col>
+  <col label="c6">Agree</col>
+  <col label="c7"><span style="color:#2E7D32;">Strongly<br />Agree</span></col>
+  <row label="r1">Access to affordable healthcare is a basic human right.</row>
+  <row label="r2">The government should regulate drug prices more strictly.</row>
+  <row label="r3">Individual responsibility matters more than government programs for health.</row>
+</radio>
+
+<suspend/>
+
+<note>--- 2.9 STYLE.CARDSHUFFLE ---</note>
+<radio
+  label="TEST_cardshuffle"
+  cond="1==2"
+  cardrating:btnlayout="horizontal"
+  cardrating:progress="0"
+  fir="off"
+  grouping="rows"
+  shuffle="rows"
+  uses="cardrating.1">
+  <title>Indicate how much you agree or disagree with each statement.</title>
+  <col label="c1"><span style="color:#C62828;">Strongly<br />DISAGREE</span></col>
+  <col label="c2">Disagree</col>
+  <col label="c3">Somewhat<br />Disagree</col>
+  <col label="c4">Neither/<br />Neutral</col>
+  <col label="c5">Somewhat<br />Agree</col>
+  <col label="c6">Agree</col>
+  <col label="c7"><span style="color:#2E7D32;">Strongly<br />AGREE</span></col>
+  <row label="r1">Vaccines should be mandatory for school-age children.</row>
+  <row label="r2">Natural remedies are undervalued by modern medicine.</row>
+  <row label="r3">Pharmaceutical companies put profits above patient welfare.</row>
+</radio>
+
+<suspend/>
+
+<note>--- 2.6 STYLE.DIFFERENTIAL ---</note>
+<radio
+  label="TEST_differential"
+  cond="1==2"
+  fir="on"
+  optional="1"
+  ss:questionClassNames="likert-gradient">
+  <title>Which statement is closer to your view?</title>
+  <comment>Tap closer to the statement you agree with more</comment>
+  <col label="c1">Keep a no-fault vaccine injury compensation program as the primary route</col>
+  <col label="c2">&amp;nbsp;</col>
+  <col label="c3">&amp;nbsp;</col>
+  <col label="c4">Neutral</col>
+  <col label="c5">&amp;nbsp;</col>
+  <col label="c6">&amp;nbsp;</col>
+  <col label="c7">Make it easier to sue vaccine manufacturers directly in civil court</col>
+  <row label="r1">Vaccine liability</row>
+</radio>
+
+<suspend/>
+
+<note>--- 2.12 STYLE.CHECKLIST ---</note>
+<checkbox
+  label="TEST_checklist"
+  cond="1==2"
+  atleast="1"
+  shuffle="rows">
+  <title>In the past 12 months, which of the following have you done?</title>
+  <comment>Select all that apply</comment>
+  <row label="r1" groups="g1">Signed a petition related to health policy</row>
+  <row label="r2" groups="g1">Attended a town hall or public meeting</row>
+  <row label="r3" groups="g1">Donated to a health-related cause</row>
+  <row label="r4" groups="g1">Contacted an elected official about health</row>
+  <row label="r5" groups="g1">Shared a health policy article on social media</row>
+  <row label="r99" exclusive="1" groups="g2" randomize="0"><span class="NoneOfThese">None of these</span></row>
+  <group label="g1" builder:axis="row" builder:default="1" where="none">actions</group>
+  <group label="g2" builder:axis="row">&amp;nbsp;&amp;nbsp;</group>
+</checkbox>
+
+<suspend/>
+
+<note>--- 2.13 STYLE.CHECKLIST.BUTTON ---</note>
+<checkbox
+  label="TEST_checklist_btn"
+  cond="1==2"
+  atm1d:large_maxWidth="200px"
+  atm1d:large_minWidth="180px"
+  atm1d:showInput="0"
+  atm1d:small_minWidth="45%"
+  atm1d:viewMode="tiled"
+  atleast="1"
+  uses="atm1d.11">
+  <title>Which of these health topics interest you most?</title>
+  <comment>Select all that apply</comment>
+  <row label="r1">Vaccines</row>
+  <row label="r2">Mental Health</row>
+  <row label="r3">Nutrition</row>
+  <row label="r4">Drug Pricing</row>
+  <row label="r5">Medicare</row>
+  <row label="r6">Rural Health</row>
+  <row label="r99" exclusive="1" randomize="0"><span class="NoneOfThese">None of these</span></row>
+</checkbox>
+
+<suspend/>
+
+<note>--- 2.2 STYLE.OPEN.TEXT ---</note>
+<textarea
+  label="TEST_opentext"
+  cond="1==2"
+  height="3"
+  optional="1"
+  width="50">
+  <title>In your own words, what is the single biggest health challenge facing your community?</title>
+  <comment>Please be as specific as you can (minimum 10 characters)</comment>
+</textarea>
+
+<suspend/>
+
+<note>--- 2.2 STYLE.DIGITBOXES ---</note>
+<number
+  label="TEST_digits"
+  cond="1==2"
+  size="5"
+  optional="1"
+  verify="range(0,99999)">
+  <title>What is your 5-digit ZIP code?</title>
+  <comment>Enter your primary residence ZIP</comment>
+</number>
+
+<suspend/>
+
+<note>--- 2.7 STYLE.RANKSORT ---</note>
+<radio
+  label="TEST_ranksort"
+  cond="1==2"
+  optional="1"
+  uses="ranking.1">
+  <title>Rank these industries from most trusted (1) to least trusted (5)</title>
+  <comment>Drag to reorder</comment>
+  <row label="r1">Biopharmaceuticals</row>
+  <row label="r2">Oil &amp; Gas</row>
+  <row label="r3">AI / Technology</row>
+  <row label="r4">Automotive Manufacturing</row>
+  <row label="r5">Aerospace &amp; Defense</row>
+</radio>
+
+<suspend/>
 </survey>
