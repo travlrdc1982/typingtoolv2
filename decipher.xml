@@ -1322,9 +1322,18 @@ form#primary, div.exit-message {
   color: #333;
 }
 
-/* --- MATRIX/GRID: remove borders, ensure row label width --- */
+/* --- MATRIX/GRID: fit within card, remove borders, row label width --- */
+table.grid-table-mode,
+.grid.grid-table-mode,
+.grid.grid-table-mode.setWidth {
+  table-layout: fixed !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
 .grid-table-mode th.row-legend,
+.grid-table-mode td.row-legend,
 .grid-table-mode .row-legend-text {
+  width: 33% !important;
   min-width: 33% !important;
   font-family: Fraunces, Georgia, serif !important;
   font-size: 14px !important;
@@ -1332,7 +1341,7 @@ form#primary, div.exit-message {
   line-height: 1.45 !important;
 }
 .grid-table-mode .nonempty { border: none !important; }
-.grid-table-mode .col-legend { background: none !important; }
+.grid-table-mode .col-legend { background: none !important; border: none !important; }
 .grid-table-mode td { border: none !important; }
 
 /* --- NONE-OF-THESE button styling --- */
