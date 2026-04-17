@@ -3455,24 +3455,22 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 <suspend/>
 
 <note>--- 2.8 STYLE.DROPDOWN ---</note>
-<radio
+<select
   label="TEST_dropdown"
   cond="1==2"
-  fir="off"
-  optional="1"
-  uses="select.1">
+  optional="1">
   <title>In which state do you currently reside?</title>
   <comment>Select from the list</comment>
-  <row label="r1">Alabama</row>
-  <row label="r2">Alaska</row>
-  <row label="r3">Arizona</row>
-  <row label="r4">Arkansas</row>
-  <row label="r5">California</row>
-  <row label="r6">Colorado</row>
-  <row label="r7">Connecticut</row>
-  <row label="r8">Delaware</row>
-  <row label="r99" randomize="0">Prefer not to answer</row>
-</radio>
+  <choice label="ch1">Alabama</choice>
+  <choice label="ch2">Alaska</choice>
+  <choice label="ch3">Arizona</choice>
+  <choice label="ch4">Arkansas</choice>
+  <choice label="ch5">California</choice>
+  <choice label="ch6">Colorado</choice>
+  <choice label="ch7">Connecticut</choice>
+  <choice label="ch8">Delaware</choice>
+  <choice label="ch99">Prefer not to answer</choice>
+</select>
 
 <suspend/>
 
