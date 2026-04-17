@@ -3359,6 +3359,7 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 <note>--- STYLE.RADIO.HORIZONTAL / LIKERT (MAHA3 - impression 5pt) ---</note>
 <radio
   label="TEST_likert"
+  builderHint="{&quot;rocochoName&quot;:&quot;radiogrid&quot;}"
   fir="on"
   optional="1"
   ss:listDisplay="0"
@@ -3429,6 +3430,7 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 <note>--- STYLE.7PTSEMANTIC / DIFFERENTIAL (PRE_4) ---</note>
 <radio
   label="TEST_differential"
+  builderHint="{&quot;rocochoName&quot;:&quot;radiogrid&quot;}"
   fir="on"
   optional="1"
   ss:listDisplay="0"
