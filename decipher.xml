@@ -3310,23 +3310,25 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 <suspend/>
 
 <note>--- STYLE.DROPDOWN (Religion) ---</note>
-<select
+<radio
   label="TEST_dropdown"
-  optional="1">
+  optional="1"
+  fir="off"
+  type="select">
   <title>What is your present religion, if any?</title>
-  <choice label="ch1">Protestant</choice>
-  <choice label="ch2">Roman Catholic</choice>
-  <choice label="ch3">LDS/Mormon</choice>
-  <choice label="ch4">Orthodox, such as Greek or Russian Orthodox</choice>
-  <choice label="ch5">Jewish</choice>
-  <choice label="ch6">Muslim</choice>
-  <choice label="ch7">Buddhist</choice>
-  <choice label="ch8">Hindu</choice>
-  <choice label="ch9">Atheist</choice>
-  <choice label="ch10">Agnostic</choice>
-  <choice label="ch11" open="1" openSize="25">Something else</choice>
-  <choice label="ch12">Nothing in particular</choice>
-</select>
+  <row label="r1" value="1">Protestant</row>
+  <row label="r2" value="2">Roman Catholic</row>
+  <row label="r3" value="3">LDS/Mormon</row>
+  <row label="r4" value="4">Orthodox, such as Greek or Russian Orthodox</row>
+  <row label="r5" value="5">Jewish</row>
+  <row label="r6" value="6">Muslim</row>
+  <row label="r7" value="7">Buddhist</row>
+  <row label="r8" value="8">Hindu</row>
+  <row label="r9" value="9">Atheist</row>
+  <row label="r10" value="10">Agnostic</row>
+  <row label="r11" value="11" open="1" openSize="25">Something else</row>
+  <row label="r12" value="12">Nothing in particular</row>
+</radio>
 
 <suspend/>
 
@@ -3334,17 +3336,18 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 <radio
   label="TEST_btn_horiz"
   optional="1"
-  uses="atmtable.6"
-  atmtable:table_css="width:100%"
-  atmtable:row_legend_css="display:none">
+  atm1d:viewMode="tiled"
+  atm1d:showInput="0"
+  atm1d:small_minWidth="100%"
+  ss:listDisplay="1"
+  uses="atm1d.11">
   <title>Thinking about the next 30 days, how likely are you to take any action related to calling on policymakers to strengthen U.S. leadership in biopharmaceutical innovation and manufacturing?</title>
   <comment>For example, sharing social media content, signing something, contacting someone, or attending a meeting</comment>
-  <col label="c1" value="1">Definitely would NOT</col>
-  <col label="c2" value="2">Probably would not</col>
-  <col label="c3" value="3">Maybe or Maybe Not</col>
-  <col label="c4" value="4">Probably would</col>
-  <col label="c5" value="5">Definitely WOULD</col>
-  <row label="r1" value="1">Response</row>
+  <row label="r1" value="1">Definitely would NOT</row>
+  <row label="r2" value="2">Probably would not</row>
+  <row label="r3" value="3">Maybe or Maybe Not</row>
+  <row label="r4" value="4">Probably would</row>
+  <row label="r5" value="5">Definitely WOULD</row>
 </radio>
 
 <suspend/>
@@ -3353,9 +3356,13 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 <radio
   label="TEST_btn_select"
   optional="1"
-  uses="atmtable.6"
-  atmtable:table_css="width:100%"
-  atmtable:row_legend_css="display:none">
+  atm1d:large_maxWidth="180px"
+  atm1d:large_minWidth="160px"
+  atm1d:viewMode="tiled"
+  atm1d:showInput="0"
+  atm1d:small_minWidth="45%"
+  ss:listDisplay="1"
+  uses="atm1d.11">
   <title>Please indicate the highest level of school you completed or the highest degree you have received...</title>
   <col label="c1" value="1">Did not finish high school</col>
   <col label="c2" value="2">High school diploma or GED</col>
@@ -3374,11 +3381,12 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 <note>--- STYLE.RADIO.HORIZONTAL / LIKERT (MAHA3 - impression 5pt) ---</note>
 <radio
   label="TEST_likert"
-  builderHint="{&quot;rocochoName&quot;:&quot;radiogrid&quot;}"
-  fir="on"
-  optional="1"
-  ss:listDisplay="0"
-  surveyDisplay="desktop">
+  cardrating:btnlayout="horizontal"
+  cardrating:progress="0"
+  fir="off"
+  grouping="rows"
+  ss:questionClassNames="rnd_cardrating"
+  uses="cardrating.1">
   <title>Overall, what is your impression of the MAHA movement or idea?</title>
   <comment>Tap where you fall on the scale</comment>
   <col label="c1" value="1"><span style="color:#C62828;">VERY<br />Unfavorable</span></col>
@@ -3425,6 +3433,7 @@ SEG2_PCT.val = "%.1f" % seg2_pct
   fir="off"
   grouping="rows"
   shuffle="rows"
+  ss:questionClassNames="rnd_cardrating"
   uses="cardrating.1">
   <title>How much do you agree or disagree..</title>
   <comment>Tap where your opinion on the statement registers</comment>
@@ -3487,18 +3496,21 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 <radio
   label="TEST_followers"
   optional="1"
-  uses="atmtable.6"
-  atmtable:table_css="width:100%"
-  atmtable:row_legend_css="display:none">
+  atm1d:large_maxWidth="180px"
+  atm1d:large_minWidth="160px"
+  atm1d:viewMode="tiled"
+  atm1d:showInput="0"
+  atm1d:small_minWidth="45%"
+  ss:listDisplay="1"
+  uses="atm1d.11">
   <title>Across all your public social-media accounts about how many followers or subscribers do you have in total?</title>
   <comment>Including from X/Twitter, Instagram, TikTok, Facebook pages, Substack, podcast, YouTube, etc.</comment>
-  <col label="c1" value="1">0 None</col>
-  <col label="c2" value="2">&amp;lt;500</col>
-  <col label="c3" value="3">500 - 2,000</col>
-  <col label="c4" value="4">2,000 - 10,000</col>
-  <col label="c5" value="5">10,000 - 50,000</col>
-  <col label="c6" value="6">50,000 +</col>
-  <row label="r1" value="1">Response</row>
+  <row label="r1" value="1">0 None</row>
+  <row label="r2" value="2">&amp;lt;500</row>
+  <row label="r3" value="3">500 - 2,000</row>
+  <row label="r4" value="4">2,000 - 10,000</row>
+  <row label="r5" value="5">10,000 - 50,000</row>
+  <row label="r6" value="6">50,000 +</row>
 </radio>
 
 <suspend/>
