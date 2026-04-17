@@ -3416,7 +3416,7 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 
 <suspend/>
 
-<html label="test_intro" cond="1==2" where="survey">
+<html label="test_intro" where="survey">
 <div style="text-align:center;padding:24px;font-family:Inter,sans-serif;">
   <h2 style="font-family:Fraunces,Georgia,serif;">Question Type Gallery</h2>
   <p style="color:#888;">One test question per type. All gated — invisible to respondents.</p>
@@ -3428,7 +3428,7 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 <note>--- 2.8 STYLE.RADIO.VERTICAL ---</note>
 <radio
   label="TEST_radio_vert"
-  cond="1==2"
+
   optional="1">
   <title>Which of these best describes your current health insurance?</title>
   <comment>Select one</comment>
@@ -3446,7 +3446,7 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 <note>--- 2.8 STYLE.DROPDOWN (radio rendered as dropdown via ss:listDisplay) ---</note>
 <radio
   label="TEST_dropdown"
-  cond="1==2"
+
   optional="1"
   ss:listDisplay="1">
   <title>In which state do you currently reside?</title>
@@ -3467,7 +3467,7 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 <note>--- 2.10 STYLE.BUTTON.HORIZONTAL ---</note>
 <radio
   label="TEST_btn_horiz"
-  cond="1==2"
+
   atm1d:large_maxWidth="160px"
   atm1d:large_minWidth="120px"
   atm1d:showInput="0"
@@ -3489,7 +3489,7 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 <note>--- 2.11 STYLE.BUTTONSELECT (grid 2x3) ---</note>
 <radio
   label="TEST_btn_select"
-  cond="1==2"
+
   atm1d:large_maxWidth="200px"
   atm1d:large_minWidth="180px"
   atm1d:showInput="0"
@@ -3511,7 +3511,7 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 <note>--- 2.9 STYLE.RADIO.HORIZONTAL / LIKERT (7-pt with gradient) ---</note>
 <radio
   label="TEST_likert"
-  cond="1==2"
+
   fir="on"
   optional="1"
   ss:questionClassNames="likert-gradient">
@@ -3532,7 +3532,7 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 <note>--- 2.9 STYLE.MATRIX (grid with gradient) ---</note>
 <radio
   label="TEST_matrix"
-  cond="1==2"
+
   builderHint="{&quot;rocochoName&quot;:&quot;radiogrid&quot;}"
   fir="on"
   shuffle="rows"
@@ -3556,7 +3556,7 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 <note>--- 2.9 STYLE.CARDSHUFFLE ---</note>
 <radio
   label="TEST_cardshuffle"
-  cond="1==2"
+
   cardrating:btnlayout="horizontal"
   cardrating:progress="0"
   fir="off"
@@ -3581,7 +3581,7 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 <note>--- 2.6 STYLE.DIFFERENTIAL ---</note>
 <radio
   label="TEST_differential"
-  cond="1==2"
+
   fir="on"
   optional="1"
   ss:questionClassNames="likert-gradient">
@@ -3602,7 +3602,7 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 <note>--- 2.12 STYLE.CHECKLIST ---</note>
 <checkbox
   label="TEST_checklist"
-  cond="1==2"
+
   atleast="1"
   shuffle="rows">
   <title>In the past 12 months, which of the following have you done?</title>
@@ -3622,7 +3622,7 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 <note>--- 2.13 STYLE.CHECKLIST.BUTTON ---</note>
 <checkbox
   label="TEST_checklist_btn"
-  cond="1==2"
+
   atm1d:large_maxWidth="200px"
   atm1d:large_minWidth="180px"
   atm1d:showInput="0"
@@ -3646,7 +3646,7 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 <note>--- 2.2 STYLE.OPEN.TEXT ---</note>
 <textarea
   label="TEST_opentext"
-  cond="1==2"
+
   height="3"
   optional="1"
   width="50">
@@ -3659,7 +3659,7 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 <note>--- 2.2 STYLE.DIGITBOXES ---</note>
 <number
   label="TEST_digits"
-  cond="1==2"
+
   size="5"
   optional="1"
   verify="range(0,99999)">
@@ -3672,7 +3672,7 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 <note>--- 2.7 STYLE.RANKSORT (number entry - native ranking uses may vary by instance) ---</note>
 <number
   label="TEST_ranksort"
-  cond="1==2"
+
   size="1"
   optional="1"
   verify="range(1,5)">
