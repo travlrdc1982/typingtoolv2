@@ -1373,6 +1373,12 @@ input.input[type="text"]:focus, textarea.input:focus {
   max-width: 600px;
 }
 
+#question_qvector4 th.row-legend,
+#question_qvector4 .row-legend-text {
+  width: 33% !important;
+  min-width: 33% !important;
+}
+
 .grid-table-mode .nonempty {
   border: unset;
 }
