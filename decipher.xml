@@ -3295,24 +3295,23 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 <suspend/>
 
 <note>--- STYLE.DROPDOWN (Religion) ---</note>
-<radio
+<select
   label="TEST_dropdown"
-  optional="1"
-  ss:listDisplay="1">
+  optional="1">
   <title>What is your present religion, if any?</title>
-  <row label="r1" value="1">Protestant</row>
-  <row label="r2" value="2">Roman Catholic</row>
-  <row label="r3" value="3">LDS/Mormon</row>
-  <row label="r4" value="4">Orthodox, such as Greek or Russian Orthodox</row>
-  <row label="r5" value="5">Jewish</row>
-  <row label="r6" value="6">Muslim</row>
-  <row label="r7" value="7">Buddhist</row>
-  <row label="r8" value="8">Hindu</row>
-  <row label="r9" value="9">Atheist</row>
-  <row label="r10" value="10">Agnostic</row>
-  <row label="r11" value="11" open="1" openSize="25">Something else</row>
-  <row label="r12" value="12">Nothing in particular</row>
-</radio>
+  <choice label="ch1">Protestant</choice>
+  <choice label="ch2">Roman Catholic</choice>
+  <choice label="ch3">LDS/Mormon</choice>
+  <choice label="ch4">Orthodox, such as Greek or Russian Orthodox</choice>
+  <choice label="ch5">Jewish</choice>
+  <choice label="ch6">Muslim</choice>
+  <choice label="ch7">Buddhist</choice>
+  <choice label="ch8">Hindu</choice>
+  <choice label="ch9">Atheist</choice>
+  <choice label="ch10">Agnostic</choice>
+  <choice label="ch11" open="1" openSize="25">Something else</choice>
+  <choice label="ch12">Nothing in particular</choice>
+</select>
 
 <suspend/>
 
@@ -3321,8 +3320,7 @@ SEG2_PCT.val = "%.1f" % seg2_pct
   label="TEST_btn_horiz"
   optional="1"
   uses="atmtable.6"
-  atmtable:btn_css="background:#fff; border:1px solid #E0DCD6; border-radius:6px; font-family:Inter,sans-serif; font-size:13px; font-weight:600; color:#333; padding:12px 8px;"
-  atmtable:btn_selected_css="background:#E8E4DE; border-color:#999; color:#333;"
+  atmtable:table_css="width:100%"
   atmtable:row_legend_css="display:none">
   <title>Thinking about the next 30 days, how likely are you to take any action related to calling on policymakers to strengthen U.S. leadership in biopharmaceutical innovation and manufacturing?</title>
   <comment>For example, sharing social media content, signing something, contacting someone, or attending a meeting</comment>
@@ -3341,8 +3339,7 @@ SEG2_PCT.val = "%.1f" % seg2_pct
   label="TEST_btn_select"
   optional="1"
   uses="atmtable.6"
-  atmtable:btn_css="background:#fff; border:1px solid #E0DCD6; border-radius:6px; font-family:Inter,sans-serif; font-size:13px; font-weight:500; color:#333; padding:14px 8px; width:30%;"
-  atmtable:btn_selected_css="background:#E8E4DE; border-color:#999;"
+  atmtable:table_css="width:100%"
   atmtable:row_legend_css="display:none">
   <title>Please indicate the highest level of school you completed or the highest degree you have received...</title>
   <col label="c1" value="1">Did not finish high school</col>
@@ -3363,7 +3360,9 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 <radio
   label="TEST_likert"
   fir="on"
-  optional="1">
+  optional="1"
+  ss:listDisplay="0"
+  surveyDisplay="desktop">
   <title>Overall, what is your impression of the MAHA movement or idea?</title>
   <comment>Tap where you fall on the scale</comment>
   <col label="c1" value="1"><span style="color:#C62828;">VERY<br />Unfavorable</span></col>
@@ -3381,7 +3380,9 @@ SEG2_PCT.val = "%.1f" % seg2_pct
   label="TEST_matrix"
   builderHint="{&quot;rocochoName&quot;:&quot;radiogrid&quot;}"
   fir="on"
-  shuffle="rows">
+  shuffle="rows"
+  ss:listDisplay="0"
+  surveyDisplay="desktop">
   <title>Tell us how much you agree or disagree with these statements</title>
   <comment>Tap where you fall on each statement...</comment>
   <col label="c1" value="1"><span style="color:#C62828;">Strongly<br />Disagree</span></col>
@@ -3429,7 +3430,9 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 <radio
   label="TEST_differential"
   fir="on"
-  optional="1">
+  optional="1"
+  ss:listDisplay="0"
+  surveyDisplay="desktop">
   <title>Which statement comes closer to your own point of view?</title>
   <col label="c1" value="1">Keep a no-fault vaccine injury compensation program as the primary route</col>
   <col label="c2" value="2">&amp;nbsp;</col>
@@ -3468,8 +3471,7 @@ SEG2_PCT.val = "%.1f" % seg2_pct
   label="TEST_followers"
   optional="1"
   uses="atmtable.6"
-  atmtable:btn_css="background:#fff; border:1px solid #E0DCD6; border-radius:6px; font-family:Inter,sans-serif; font-size:13px; font-weight:500; color:#333; padding:14px 8px; width:30%;"
-  atmtable:btn_selected_css="background:#E8E4DE; border-color:#999;"
+  atmtable:table_css="width:100%"
   atmtable:row_legend_css="display:none">
   <title>Across all your public social-media accounts about how many followers or subscribers do you have in total?</title>
   <comment>Including from X/Twitter, Instagram, TikTok, Facebook pages, Substack, podcast, YouTube, etc.</comment>
