@@ -3310,25 +3310,23 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 <suspend/>
 
 <note>--- STYLE.DROPDOWN (Religion) ---</note>
-<radio
+<select
   label="TEST_dropdown"
-  optional="1"
-  fir="off"
-  type="select">
+  optional="1">
   <title>What is your present religion, if any?</title>
-  <row label="r1" value="1">Protestant</row>
-  <row label="r2" value="2">Roman Catholic</row>
-  <row label="r3" value="3">LDS/Mormon</row>
-  <row label="r4" value="4">Orthodox, such as Greek or Russian Orthodox</row>
-  <row label="r5" value="5">Jewish</row>
-  <row label="r6" value="6">Muslim</row>
-  <row label="r7" value="7">Buddhist</row>
-  <row label="r8" value="8">Hindu</row>
-  <row label="r9" value="9">Atheist</row>
-  <row label="r10" value="10">Agnostic</row>
-  <row label="r11" value="11" open="1" openSize="25">Something else</row>
-  <row label="r12" value="12">Nothing in particular</row>
-</radio>
+  <choice label="ch1">Protestant</choice>
+  <choice label="ch2">Roman Catholic</choice>
+  <choice label="ch3">LDS/Mormon</choice>
+  <choice label="ch4">Orthodox, such as Greek or Russian Orthodox</choice>
+  <choice label="ch5">Jewish</choice>
+  <choice label="ch6">Muslim</choice>
+  <choice label="ch7">Buddhist</choice>
+  <choice label="ch8">Hindu</choice>
+  <choice label="ch9">Atheist</choice>
+  <choice label="ch10">Agnostic</choice>
+  <choice label="ch11" open="1" openSize="25">Something else</choice>
+  <choice label="ch12">Nothing in particular</choice>
+</select>
 
 <suspend/>
 
