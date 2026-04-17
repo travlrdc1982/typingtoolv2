@@ -3611,7 +3611,7 @@ SEG2_PCT.val = "%.1f" % seg2_pct
   <row label="r3" value="3" groups="g1">Donated to a health-related cause</row>
   <row label="r4" value="4" groups="g1">Contacted an elected official about health</row>
   <row label="r5" value="5" groups="g1">Shared a health policy article on social media</row>
-  <row label="r99" exclusive="1" groups="g2" randomize="0"><span class="NoneOfThese">None of these</span></row>
+  <row label="r99" value="99" exclusive="1" groups="g2" randomize="0"><span class="NoneOfThese">None of these</span></row>
   <group label="g1" builder:axis="row" builder:default="1" where="none">actions</group>
   <group label="g2" builder:axis="row">&amp;nbsp;&amp;nbsp;</group>
 </checkbox>
