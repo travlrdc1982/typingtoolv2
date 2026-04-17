@@ -1271,37 +1271,30 @@ var defined = function(s,c){ return (c||document).querySelector(s); };
 <style mode="after" name="respview.client.css"><![CDATA[
 <style>
 /* ================================================================
-   PRISM UNIVERSAL STYLE GUIDE (global scope - intentional)
-   Applies to all survey pages. Use with= on per-question overrides. (global scope - intentional)
-   Applies to all survey pages. Use with= on per-question overrides. — Design Tokens + Question Types
-   Font stack: Fraunces (headings/statements) + Inter (UI/labels)
+   PRISM UNIVERSAL STYLE GUIDE - Minimal overrides only.
+   Let Decipher native rendering handle layout.
+   Tokens: green #6B7F4E | red #C62828 | border #E0DCD6
+           text #333 | text-secondary #888 | bg #F5F2ED
    ================================================================ */
 
-/* --- TOKENS (hard-coded per Rule 18.3 - no var()) ---
-   green: #6B7F4E | red: #C62828 | gray: #BDBDBD
-   border: #E0DCD6 | text: #333333 | text-secondary: #888888
-   card-bg: #FFFFFF | survey-bg: #F5F2ED
-   --- */
-
-/* --- GLOBAL TYPOGRAPHY --- */
+/* --- TYPOGRAPHY --- */
 h1.question-text, .ParaText, .question-text {
   font-family: Fraunces, Georgia, serif !important;
   font-size: 19px !important;
   font-weight: 700 !important;
-  color: #333333 !important;
+  color: #333 !important;
   line-height: 1.42 !important;
 }
 .comment, .instruction-text {
   font-family: Inter, sans-serif !important;
   font-size: 13px !important;
-  color: #888888 !important;
-  line-height: 1.5 !important;
+  color: #888 !important;
 }
 
 /* --- CARD CONTAINER --- */
 form#primary, div.exit-message {
   border: 1px solid #E0DCD6;
-  background-color: #FFFFFF;
+  background: #fff;
   padding: 22px 24px 20px;
   margin-bottom: 20px;
   border-radius: 10px;
@@ -1320,167 +1313,39 @@ form#primary, div.exit-message {
   font-weight: 700 !important;
   letter-spacing: .08em !important;
   text-transform: uppercase !important;
-  cursor: pointer !important;
-}
-#btn_continue:hover, input.button[type="submit"]:hover {
-  filter: brightness(1.08);
 }
 
-/* --- NOANSWER / PNTA ROW (global hide when noanswer="0") --- */
-.noanswer-row.hidden { display: none !important; }
-
-/* ================================================================
-   2.8 STYLE.RADIO.VERTICAL — standard single-select list
-   Native Decipher: <radio> (default layout)
-   ================================================================ */
+/* --- ANSWERS LIST (vertical radio/checkbox) --- */
 .answers.answers-list label {
   font-family: Fraunces, Georgia, serif;
   font-size: 15px;
-  color: #333333;
-}
-.answers.answers-list input[type="radio"] {
-  width: 20px; height: 20px;
+  color: #333;
 }
 
-/* ================================================================
-   2.8 STYLE.DROPDOWN — native <select>
-   Native Decipher: <radio> with fir="off" or <select>
-   ================================================================ */
-.fir-select2-dropdown, select.input.dropdown {
-  font-family: Fraunces, Georgia, serif !important;
-  font-size: 15px !important;
-  border: 1px solid #E0DCD6 !important;
-  border-radius: 6px !important;
-  padding: 8px 12px !important;
-}
-
-/* ================================================================
-   2.10 STYLE.BUTTON.HORIZONTAL — row of rectangular buttons
-   Native Decipher: <radio uses="atm1d.11"> with atm1d:viewMode="tiled"
-   ================================================================ */
-fieldset.atm1d_tiled .answers > div label {
-  font-family: Inter, sans-serif !important;
-  font-size: 13px !important;
-  font-weight: 600 !important;
-  border: 1px solid #E0DCD6 !important;
-  border-radius: 8px !important;
-  padding: 12px 16px !important;
-  text-align: center !important;
-  transition: all .2s ease !important;
-  cursor: pointer !important;
-  background: #FFFFFF !important;
-}
-fieldset.atm1d_tiled .answers > div input[type="radio"]:checked ~ div > label,
-fieldset.atm1d_tiled .answers > div input[type="checkbox"]:checked ~ div > label {
-  background: #6B7F4E !important;
-  color: #fff !important;
-  border-color: #6B7F4E !important;
-}
-fieldset.atm1d_tiled .answers > div label:hover {
-  border-color: #6B7F4E !important;
-  box-shadow: 0 2px 8px rgba(107,127,78,.2) !important;
-}
-
-/* ================================================================
-   2.9 STYLE.RADIO.HORIZONTAL / STYLE.SINGLE.LIKERT
-   FIR radio scale with gradient fills
-   Native Decipher: <radio fir="on"> or question-level fir
-   ================================================================ */
-.fir-icon svg {
-  width: 44px !important; height: 44px !important; min-width: 44px !important;
-  border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0,0,0,.12), inset 0 1px 2px rgba(255,255,255,.6);
-  cursor: pointer;
-  transition: all .2s ease;
-}
-.fir-icon svg:hover { transform: scale(1.08); }
-
-/* 7-point gradient: red -> gray -> green
-   nth-child(2)=c1 assumes row legend is td:first-child (standard Decipher grid) */
-.likert-gradient td:nth-child(2) .fir-icon.selected .fir-selected { fill: #C62828 !important; }
-.likert-gradient td:nth-child(3) .fir-icon.selected .fir-selected { fill: #EF5350 !important; }
-.likert-gradient td:nth-child(4) .fir-icon.selected .fir-selected { fill: #F6A6A6 !important; }
-.likert-gradient td:nth-child(5) .fir-icon.selected .fir-selected { fill: #BDBDBD !important; }
-.likert-gradient td:nth-child(6) .fir-icon.selected .fir-selected { fill: #A5D6A7 !important; }
-.likert-gradient td:nth-child(7) .fir-icon.selected .fir-selected { fill: #66BB6A !important; }
-.likert-gradient td:nth-child(8) .fir-icon.selected .fir-selected { fill: #2E7D32 !important; }
-
-/* hover preview gradient */
-.likert-gradient td:nth-child(2):hover .fir-selected { fill: #C62828 !important; }
-.likert-gradient td:nth-child(3):hover .fir-selected { fill: #EF5350 !important; }
-.likert-gradient td:nth-child(4):hover .fir-selected { fill: #F6A6A6 !important; }
-.likert-gradient td:nth-child(5):hover .fir-selected { fill: #BDBDBD !important; }
-.likert-gradient td:nth-child(6):hover .fir-selected { fill: #A5D6A7 !important; }
-.likert-gradient td:nth-child(7):hover .fir-selected { fill: #66BB6A !important; }
-.likert-gradient td:nth-child(8):hover .fir-selected { fill: #2E7D32 !important; }
-
-/* ================================================================
-   2.9 STYLE.MATRIX / STYLE.CARDSHUFFLE — grid/matrix questions
-   Ensure >=33% width for row labels
-   ================================================================ */
+/* --- MATRIX/GRID: remove borders, ensure row label width --- */
 .grid-table-mode th.row-legend,
 .grid-table-mode .row-legend-text {
   min-width: 33% !important;
   font-family: Fraunces, Georgia, serif !important;
   font-size: 14px !important;
-  color: #333333 !important;
+  color: #333 !important;
   line-height: 1.45 !important;
-  padding-right: 12px !important;
 }
-.grid-table-mode .col-legend {
-  font-family: Inter, sans-serif !important;
-  font-size: 11px !important;
-  font-weight: 600 !important;
-  text-transform: uppercase !important;
-  letter-spacing: .04em !important;
-}
+.grid-table-mode .nonempty { border: none !important; }
+.grid-table-mode .col-legend { background: none !important; }
+.grid-table-mode td { border: none !important; }
 
-/* Card shuffle (cardrating) */
-.sq-cardrating-button {
-  padding: 10px !important;
-  height: auto !important;
-  min-height: 48px !important;
-  line-height: 1.3 !important;
-  font-family: Fraunces, Georgia, serif !important;
-  font-size: 14px !important;
-}
-
-/* ================================================================
-   2.6 STYLE.DIFFERENTIAL — semantic differential 7-pt scale
-   ================================================================ */
-.differential-row {
-  display: flex; align-items: center; gap: 12px;
-  padding: 16px 0; border-bottom: 1px solid #E0DCD6;
-}
-.differential-statement {
-  flex: 1; font-family: Fraunces, Georgia, serif;
-  font-size: 14px; line-height: 1.5; color: #333333;
-}
-.differential-statement.left { text-align: right; }
-.differential-statement.right { text-align: left; }
-
-/* ================================================================
-   2.12 STYLE.CHECKLIST — multi-select checkboxes
-   ================================================================ */
-.answers.answers-list input[type="checkbox"] {
-  width: 20px; height: 20px;
-}
-.answers.answers-list input[type="checkbox"]:checked + label,
-.answers.answers-list input[type="checkbox"]:checked ~ div > label {
-  font-weight: 600;
-}
+/* --- NONE-OF-THESE button styling --- */
 span.NoneOfThese {
   font-family: Inter, sans-serif !important;
   font-size: 12px !important;
   font-weight: 600 !important;
-  color: #888888 !important;
+  color: #888 !important;
   text-transform: uppercase !important;
   letter-spacing: .06em !important;
 }
 
-/* ================================================================
-   2.2 STYLE.OPEN.TEXT / STYLE.DIGITBOXES
-   ================================================================ */
+/* --- TEXT/TEXTAREA inputs --- */
 input.input[type="text"], textarea.input {
   font-family: Inter, sans-serif !important;
   font-size: 15px !important;
@@ -1492,27 +1357,6 @@ input.input[type="text"]:focus, textarea.input:focus {
   border-color: #6B7F4E !important;
   outline: none !important;
   box-shadow: 0 0 0 3px rgba(107,127,78,.15) !important;
-}
-
-/* ================================================================
-   2.7 STYLE.RANKSORT — drag-and-drop ranking
-   ================================================================ */
-.ranking-item, .sortable-item {
-  font-family: Inter, sans-serif !important;
-  font-size: 14px !important;
-  padding: 12px 16px !important;
-  border: 1px solid #E0DCD6 !important;
-  border-radius: 8px !important;
-  background: #FFFFFF !important;
-  margin-bottom: 6px !important;
-  cursor: grab !important;
-}
-.ranking-item:active, .sortable-item:active { cursor: grabbing !important; }
-.rank-number {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 28px; height: 28px; border-radius: 50%;
-  background: #6B7F4E; color: #fff;
-  font-weight: 700; font-size: 13px; margin-right: 12px;
 }
 
 </style>
@@ -3411,207 +3255,201 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 
 
 <note>===================== STYLE GUIDE TEST QUESTIONS =====================</note>
-<note>These test questions demonstrate each question type with PRISM styling.
-      Gate behind cond="1==2" to hide from real respondents.</note>
+<note>Real question content from PRISM design mockups. Ungated for design review.</note>
 
 <suspend/>
 
 <html label="test_intro" where="survey">
 <div style="text-align:center;padding:24px;font-family:Inter,sans-serif;">
   <h2 style="font-family:Fraunces,Georgia,serif;">Question Type Gallery</h2>
-  <p style="color:#888;">One test question per type. All gated — invisible to respondents.</p>
+  <p style="color:#888;">Real test questions matching PRISM design specs.</p>
 </div>
 </html>
 
 <suspend/>
 
-<note>--- 2.8 STYLE.RADIO.VERTICAL ---</note>
+<note>--- STYLE.RADIO.VERTICAL (MAHA2) ---</note>
 <radio
   label="TEST_radio_vert"
-
   optional="1">
-  <title>Which of these best describes your current health insurance?</title>
+  <title>When you hear the term MAHA, what does it most closely represent to you?</title>
   <comment>Select one</comment>
-  <row label="r1" value="1">Employer-sponsored</row>
-  <row label="r2" value="2">ACA / Marketplace plan</row>
-  <row label="r3" value="3">Medicare</row>
-  <row label="r4" value="4">Medicaid</row>
-  <row label="r5" value="5">Uninsured</row>
-  <row label="r6" value="6" open="1" openSize="25" randomize="0">Other</row>
-  <row label="r99" value="99" randomize="0">Not sure</row>
+  <row label="r1" value="1">A movement focused on food quality, nutrition, and chronic disease</row>
+  <row label="r2" value="2">A broader critique of drug and food companies, and the health system</row>
+  <row label="r3" value="3">A political slogan more than a real movement</row>
+  <row label="r4" value="4">A personal health or lifestyle philosophy</row>
+  <row label="r5" value="5">A fringe or extreme health movement</row>
+  <row label="r6" value="6">The movement around Robert F. Kennedy, Jr.</row>
+  <row label="r7" value="7">The health movement led by Donald Trump</row>
+  <row label="r8" value="8">Something unclear or hard to define</row>
+  <row label="r9" value="9" open="1" openSize="25" randomize="0">Something else</row>
+  <row label="r99" value="99" randomize="0">Not Sure</row>
 </radio>
 
 <suspend/>
 
-<note>--- 2.8 STYLE.DROPDOWN (radio rendered as dropdown via ss:listDisplay) ---</note>
+<note>--- STYLE.DROPDOWN (Religion) ---</note>
 <radio
   label="TEST_dropdown"
-
   optional="1"
   ss:listDisplay="1">
-  <title>In which state do you currently reside?</title>
-  <comment>Select from the list</comment>
-  <row label="r1" value="1">Alabama</row>
-  <row label="r2" value="2">Alaska</row>
-  <row label="r3" value="3">Arizona</row>
-  <row label="r4" value="4">Arkansas</row>
-  <row label="r5" value="5">California</row>
-  <row label="r6" value="6">Colorado</row>
-  <row label="r7" value="7">Connecticut</row>
-  <row label="r8" value="8">Delaware</row>
-  <row label="r99" value="99" randomize="0">Prefer not to answer</row>
+  <title>What is your present religion, if any?</title>
+  <row label="r1" value="1">Protestant</row>
+  <row label="r2" value="2">Roman Catholic</row>
+  <row label="r3" value="3">LDS/Mormon</row>
+  <row label="r4" value="4">Orthodox, such as Greek or Russian Orthodox</row>
+  <row label="r5" value="5">Jewish</row>
+  <row label="r6" value="6">Muslim</row>
+  <row label="r7" value="7">Buddhist</row>
+  <row label="r8" value="8">Hindu</row>
+  <row label="r9" value="9">Atheist</row>
+  <row label="r10" value="10">Agnostic</row>
+  <row label="r11" value="11" open="1" openSize="25">Something else</row>
+  <row label="r12" value="12">Nothing in particular</row>
 </radio>
 
 <suspend/>
 
-<note>--- 2.10 STYLE.BUTTON.HORIZONTAL ---</note>
+<note>--- STYLE.BUTTON.HORIZONTAL (P1 - likelihood) uses atmtable.6 ---</note>
 <radio
   label="TEST_btn_horiz"
-
-  atm1d:large_maxWidth="160px"
-  atm1d:large_minWidth="120px"
-  atm1d:showInput="0"
-  atm1d:small_minWidth="100%"
-  atm1d:viewMode="tiled"
   optional="1"
-  uses="atm1d.11">
-  <title>How effective do you think current U.S. health policy is?</title>
-  <comment>Select one</comment>
-  <row label="r1" value="1">Very Ineffective</row>
-  <row label="r2" value="2">Somewhat Ineffective</row>
-  <row label="r3" value="3">Neither</row>
-  <row label="r4" value="4">Somewhat Effective</row>
-  <row label="r5" value="5">Very Effective</row>
+  uses="atmtable.6"
+  atmtable:btn_css="background:#fff; border:1px solid #E0DCD6; border-radius:6px; font-family:Inter,sans-serif; font-size:13px; font-weight:600; color:#333; padding:12px 8px;"
+  atmtable:btn_selected_css="background:#E8E4DE; border-color:#999; color:#333;"
+  atmtable:row_legend_css="display:none">
+  <title>Thinking about the next 30 days, how likely are you to take any action related to calling on policymakers to strengthen U.S. leadership in biopharmaceutical innovation and manufacturing?</title>
+  <comment>For example, sharing social media content, signing something, contacting someone, or attending a meeting</comment>
+  <col label="c1" value="1">Definitely would NOT</col>
+  <col label="c2" value="2">Probably would not</col>
+  <col label="c3" value="3">Maybe or Maybe Not</col>
+  <col label="c4" value="4">Probably would</col>
+  <col label="c5" value="5">Definitely WOULD</col>
+  <row label="r1" value="1">Response</row>
 </radio>
 
 <suspend/>
 
-<note>--- 2.11 STYLE.BUTTONSELECT (grid 2x3) ---</note>
+<note>--- STYLE.BUTTONSELECT 3x3 (Education) uses atmtable.6 ---</note>
 <radio
   label="TEST_btn_select"
-
-  atm1d:large_maxWidth="200px"
-  atm1d:large_minWidth="180px"
-  atm1d:showInput="0"
-  atm1d:small_minWidth="45%"
-  atm1d:viewMode="tiled"
   optional="1"
-  uses="atm1d.11">
-  <title>How many people live in your household including yourself?</title>
-  <row label="r1" value="1">1</row>
-  <row label="r2" value="2">2</row>
-  <row label="r3" value="3">3</row>
-  <row label="r4" value="4">4</row>
-  <row label="r5" value="5">5</row>
-  <row label="r6" value="6">6 or more</row>
+  uses="atmtable.6"
+  atmtable:btn_css="background:#fff; border:1px solid #E0DCD6; border-radius:6px; font-family:Inter,sans-serif; font-size:13px; font-weight:500; color:#333; padding:14px 8px; width:30%;"
+  atmtable:btn_selected_css="background:#E8E4DE; border-color:#999;"
+  atmtable:row_legend_css="display:none">
+  <title>Please indicate the highest level of school you completed or the highest degree you have received...</title>
+  <col label="c1" value="1">Did not finish high school</col>
+  <col label="c2" value="2">High school diploma or GED</col>
+  <col label="c3" value="3">Some college credit, no degree</col>
+  <col label="c4" value="4">Trade/technical/ vocational training</col>
+  <col label="c5" value="5">Associate's degree</col>
+  <col label="c6" value="6">Bachelor's degree</col>
+  <col label="c7" value="7">Master's degree</col>
+  <col label="c8" value="8">Professional degree (JD, MD)</col>
+  <col label="c9" value="9">Doctorate degree (PhD)</col>
+  <row label="r1" value="1">Response</row>
 </radio>
 
 <suspend/>
 
-<note>--- 2.9 STYLE.RADIO.HORIZONTAL / LIKERT (7-pt with gradient) ---</note>
+<note>--- STYLE.RADIO.HORIZONTAL / LIKERT (MAHA3 - impression 5pt) ---</note>
 <radio
   label="TEST_likert"
-
   fir="on"
-  optional="1"
-  ss:questionClassNames="likert-gradient">
-  <title>How safe do you believe childhood vaccines are?</title>
+  optional="1">
+  <title>Overall, what is your impression of the MAHA movement or idea?</title>
   <comment>Tap where you fall on the scale</comment>
-  <col label="c1"><span style="color:#C62828;">Very<br />Unsafe</span></col>
-  <col label="c2">&amp;nbsp;</col>
-  <col label="c3">&amp;nbsp;</col>
-  <col label="c4"><span style="color:#737374;">Neutral/<br />Unsure</span></col>
-  <col label="c5">&amp;nbsp;</col>
-  <col label="c6">&amp;nbsp;</col>
-  <col label="c7"><span style="color:#2E7D32;">Very<br />Safe</span></col>
-  <row label="r1" value="1">Childhood vaccines</row>
+  <col label="c1" value="1"><span style="color:#C62828;">VERY<br />Unfavorable</span></col>
+  <col label="c2" value="2">Somewhat<br />Unfavorable</col>
+  <col label="c3" value="3"><span style="color:#737374;">Neutral/<br />Unsure</span></col>
+  <col label="c4" value="4">Somewhat<br />Favorable</col>
+  <col label="c5" value="5"><span style="color:#2E7D32;">VERY<br />Favorable</span></col>
+  <row label="r1" value="1">Impression</row>
 </radio>
 
 <suspend/>
 
-<note>--- 2.9 STYLE.MATRIX (grid with gradient) ---</note>
+<note>--- STYLE.MATRIX (MOB - agree/disagree 7pt) ---</note>
 <radio
   label="TEST_matrix"
-
   builderHint="{&quot;rocochoName&quot;:&quot;radiogrid&quot;}"
   fir="on"
-  shuffle="rows"
-  ss:questionClassNames="likert-gradient">
-  <title>How much do you agree or disagree with each statement?</title>
-  <comment>Select one per row</comment>
-  <col label="c1"><span style="color:#C62828;">Strongly<br />Disagree</span></col>
-  <col label="c2">Disagree</col>
-  <col label="c3">Somewhat<br />Disagree</col>
-  <col label="c4">Neither/<br />Neutral</col>
-  <col label="c5">Somewhat<br />Agree</col>
-  <col label="c6">Agree</col>
-  <col label="c7"><span style="color:#2E7D32;">Strongly<br />Agree</span></col>
-  <row label="r1" value="1">Access to affordable healthcare is a basic human right.</row>
-  <row label="r2" value="2">The government should regulate drug prices more strictly.</row>
-  <row label="r3" value="3">Individual responsibility matters more than government programs for health.</row>
+  shuffle="rows">
+  <title>Tell us how much you agree or disagree with these statements</title>
+  <comment>Tap where you fall on each statement...</comment>
+  <col label="c1" value="1"><span style="color:#C62828;">Strongly<br />Disagree</span></col>
+  <col label="c2" value="2">&amp;nbsp;</col>
+  <col label="c3" value="3">&amp;nbsp;</col>
+  <col label="c4" value="4"><span style="color:#737374;">Neutral/<br />Unsure</span></col>
+  <col label="c5" value="5">&amp;nbsp;</col>
+  <col label="c6" value="6">&amp;nbsp;</col>
+  <col label="c7" value="7"><span style="color:#2E7D32;">Strongly<br />Agree</span></col>
+  <row label="r1" value="1">Working with others, people like me can have an impact on influencing policymakers to support U.S. leadership in biopharmaceutical innovation and manufacturing</row>
+  <row label="r2" value="2">I know what steps to take to make my voice heard on issues like U.S. medicine manufacturing and innovation.</row>
+  <row label="r3" value="3">This issue raises important questions of right and wrong for me personally.</row>
+  <row label="r4" value="4">It worries me to think about how decisions made today could affect the future of health care and America's standing in the world.</row>
+  <row label="r5" value="5">If I asked, many of my friends or colleagues would be willing to join me in supporting stronger protections for U.S. medicine manufacturing and innovation.</row>
 </radio>
 
 <suspend/>
 
-<note>--- 2.9 STYLE.CARDSHUFFLE ---</note>
+<note>--- STYLE.CARDSHUFFLE (PRE_1-3 agree/disagree) ---</note>
 <radio
   label="TEST_cardshuffle"
-
   cardrating:btnlayout="horizontal"
   cardrating:progress="0"
   fir="off"
   grouping="rows"
   shuffle="rows"
   uses="cardrating.1">
-  <title>Indicate how much you agree or disagree with each statement.</title>
-  <col label="c1"><span style="color:#C62828;">Strongly<br />DISAGREE</span></col>
-  <col label="c2">Disagree</col>
-  <col label="c3">Somewhat<br />Disagree</col>
-  <col label="c4">Neither/<br />Neutral</col>
-  <col label="c5">Somewhat<br />Agree</col>
-  <col label="c6">Agree</col>
-  <col label="c7"><span style="color:#2E7D32;">Strongly<br />AGREE</span></col>
-  <row label="r1" value="1">Vaccines should be mandatory for school-age children.</row>
-  <row label="r2" value="2">Natural remedies are undervalued by modern medicine.</row>
-  <row label="r3" value="3">Pharmaceutical companies put profits above patient welfare.</row>
+  <title>How much do you agree or disagree..</title>
+  <comment>Tap where your opinion on the statement registers</comment>
+  <col label="c1" value="1"><span style="color:#C62828;">Strongly<br />Disagree</span></col>
+  <col label="c2" value="2">&amp;nbsp;</col>
+  <col label="c3" value="3">&amp;nbsp;</col>
+  <col label="c4" value="4">Neutral/<br />Unsure</col>
+  <col label="c5" value="5">&amp;nbsp;</col>
+  <col label="c6" value="6">&amp;nbsp;</col>
+  <col label="c7" value="7"><span style="color:#2E7D32;">Strongly<br />Agree</span></col>
+  <row label="r1" value="1">Overall, the U.S. vaccine safety system operates in a fair and responsible way</row>
+  <row label="r2" value="2">Decisions about vaccine safety and compensation are made using fair and transparent processes.</row>
+  <row label="r3" value="3">We should protect the VICP because it is better to have a no-fault compensation program rather than encouraging more lawsuits against vaccine manufacturers.</row>
 </radio>
 
 <suspend/>
 
-<note>--- 2.6 STYLE.DIFFERENTIAL ---</note>
+<note>--- STYLE.7PTSEMANTIC / DIFFERENTIAL (PRE_4) ---</note>
 <radio
   label="TEST_differential"
-
   fir="on"
-  optional="1"
-  ss:questionClassNames="likert-gradient">
-  <title>Which statement is closer to your view?</title>
-  <comment>Tap closer to the statement you agree with more</comment>
-  <col label="c1">Keep a no-fault vaccine injury compensation program as the primary route</col>
-  <col label="c2">&amp;nbsp;</col>
-  <col label="c3">&amp;nbsp;</col>
-  <col label="c4">Neutral</col>
-  <col label="c5">&amp;nbsp;</col>
-  <col label="c6">&amp;nbsp;</col>
-  <col label="c7">Make it easier to sue vaccine manufacturers directly in civil court</col>
+  optional="1">
+  <title>Which statement comes closer to your own point of view?</title>
+  <col label="c1" value="1">Keep a no-fault vaccine injury compensation program as the primary route</col>
+  <col label="c2" value="2">&amp;nbsp;</col>
+  <col label="c3" value="3">&amp;nbsp;</col>
+  <col label="c4" value="4"><span style="color:#737374;">Neutral</span></col>
+  <col label="c5" value="5">&amp;nbsp;</col>
+  <col label="c6" value="6">&amp;nbsp;</col>
+  <col label="c7" value="7">Make it easier to sue vaccine manufacturers directly in civil court</col>
   <row label="r1" value="1">Vaccine liability</row>
 </radio>
 
 <suspend/>
 
-<note>--- 2.12 STYLE.CHECKLIST ---</note>
+<note>--- STYLE.CHECKLIST (INF360 - influence) ---</note>
 <checkbox
   label="TEST_checklist"
-
   atleast="1"
   shuffle="rows">
-  <title>In the past 12 months, which of the following have you done?</title>
-  <comment>Select all that apply</comment>
-  <row label="r1" value="1" groups="g1">Signed a petition related to health policy</row>
-  <row label="r2" value="2" groups="g1">Attended a town hall or public meeting</row>
-  <row label="r3" value="3" groups="g1">Donated to a health-related cause</row>
-  <row label="r4" value="4" groups="g1">Contacted an elected official about health</row>
-  <row label="r5" value="5" groups="g1">Shared a health policy article on social media</row>
+  <title>How have you made your voice heard?</title>
+  <comment>Select all that apply. At the end, you'll see your Influence Compass.</comment>
+  <row label="r1" value="1" groups="g1">I've worked inside government, held office, or staffed those who do</row>
+  <row label="r2" value="2" groups="g1">I've helped decide who runs for office or who gets hired in political or government roles</row>
+  <row label="r3" value="3" groups="g1">I advise organizations, sit on boards, or have testified on policy matters</row>
+  <row label="r4" value="4" groups="g1">I've written, spoken publicly, or published on issues</row>
+  <row label="r5" value="5" groups="g1">I've organized people, worked campaigns, or rallied others to action</row>
+  <row label="r6" value="6" groups="g1">I vote, follow current events, and stay involved in my community</row>
   <row label="r99" value="99" exclusive="1" groups="g2" randomize="0"><span class="NoneOfThese">None of these</span></row>
   <group label="g1" builder:axis="row" builder:default="1" where="none">actions</group>
   <group label="g2" builder:axis="row">&amp;nbsp;&amp;nbsp;</group>
@@ -3619,47 +3457,42 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 
 <suspend/>
 
-<note>--- 2.13 STYLE.CHECKLIST.BUTTON ---</note>
-<checkbox
-  label="TEST_checklist_btn"
-
-  atm1d:large_maxWidth="200px"
-  atm1d:large_minWidth="180px"
-  atm1d:showInput="0"
-  atm1d:small_minWidth="45%"
-  atm1d:viewMode="tiled"
-  atleast="1"
-  uses="atm1d.11">
-  <title>Which of these health topics interest you most?</title>
-  <comment>Select all that apply</comment>
-  <row label="r1" value="1">Vaccines</row>
-  <row label="r2" value="2">Mental Health</row>
-  <row label="r3" value="3">Nutrition</row>
-  <row label="r4" value="4">Drug Pricing</row>
-  <row label="r5" value="5">Medicare</row>
-  <row label="r6" value="6">Rural Health</row>
-  <row label="r99" value="99" exclusive="1" randomize="0"><span class="NoneOfThese">None of these</span></row>
-</checkbox>
+<note>--- STYLE.BUTTONSELECT (followers count 3x2) uses atmtable.6 ---</note>
+<radio
+  label="TEST_followers"
+  optional="1"
+  uses="atmtable.6"
+  atmtable:btn_css="background:#fff; border:1px solid #E0DCD6; border-radius:6px; font-family:Inter,sans-serif; font-size:13px; font-weight:500; color:#333; padding:14px 8px; width:30%;"
+  atmtable:btn_selected_css="background:#E8E4DE; border-color:#999;"
+  atmtable:row_legend_css="display:none">
+  <title>Across all your public social-media accounts about how many followers or subscribers do you have in total?</title>
+  <comment>Including from X/Twitter, Instagram, TikTok, Facebook pages, Substack, podcast, YouTube, etc.</comment>
+  <col label="c1" value="1">0 None</col>
+  <col label="c2" value="2">&amp;lt;500</col>
+  <col label="c3" value="3">500 - 2,000</col>
+  <col label="c4" value="4">2,000 - 10,000</col>
+  <col label="c5" value="5">10,000 - 50,000</col>
+  <col label="c6" value="6">50,000 +</col>
+  <row label="r1" value="1">Response</row>
+</radio>
 
 <suspend/>
 
-<note>--- 2.2 STYLE.OPEN.TEXT ---</note>
+<note>--- STYLE.OPEN.TEXT (GLP-1 open end) ---</note>
 <textarea
   label="TEST_opentext"
-
   height="3"
   optional="1"
   width="50">
-  <title>In your own words, what is the single biggest health challenge facing your community?</title>
-  <comment>Please be as specific as you can (minimum 10 characters)</comment>
+  <title>What have you seen, read or heard about GLP-1s?</title>
+  <comment>Tell us as much as you can recall and where you heard about it.</comment>
 </textarea>
 
 <suspend/>
 
-<note>--- 2.2 STYLE.DIGITBOXES ---</note>
+<note>--- STYLE.DIGITBOXES (ZIP code) ---</note>
 <number
   label="TEST_digits"
-
   size="5"
   optional="1"
   verify="range(0,99999)">
@@ -3669,20 +3502,19 @@ SEG2_PCT.val = "%.1f" % seg2_pct
 
 <suspend/>
 
-<note>--- 2.7 STYLE.RANKSORT (number entry - native ranking uses may vary by instance) ---</note>
+<note>--- STYLE.RANKSORT (RANK_PRE_4 - industries) ---</note>
 <number
   label="TEST_ranksort"
-
   size="1"
   optional="1"
   verify="range(1,5)">
-  <title>Rank these industries from most trusted (1) to least trusted (5)</title>
-  <comment>Enter a number 1-5 for each (no ties)</comment>
-  <row label="r1" value="1">Biopharmaceuticals</row>
-  <row label="r2" value="2">Oil and Gas</row>
-  <row label="r3" value="3">AI / Technology</row>
-  <row label="r4" value="4">Automotive Manufacturing</row>
-  <row label="r5" value="5">Aerospace and Defense</row>
+  <title>Which of the following industries is most important for America to be a global leader?</title>
+  <comment>Rank these industries in order of importance by dragging and sorting.</comment>
+  <row label="r1" value="1">Oil and Gas</row>
+  <row label="r2" value="2">Biopharmaceuticals</row>
+  <row label="r3" value="3">Automotive Manufacturing</row>
+  <row label="r4" value="4">Artificial Intelligence/Tech</row>
+  <row label="r5" value="5">Aerospace</row>
 </number>
 
 <suspend/>
